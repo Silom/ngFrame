@@ -4,6 +4,8 @@ ngFrame is a front end for [Frame](git@github.com:jedireza/frame.git)
 
 *Please note, this project is at a very early point.*
 
+*If you want to try it out, use this [Frame fork](https://github.com/Silom/frame)*
+
 ## Technology
 
 |     Client     | Development |
