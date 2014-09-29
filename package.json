@@ -1,0 +1,39 @@
+{
+  "name": "ngFrame",
+  "version": "0.0.1",
+  "description": "Angular.js front end for Frame",
+  "private": true,
+  "scripts": {
+    "start": "gulp"
+  },
+  "dependencies": {
+    "underscore": "^1.7.0",
+    "async": "^0.9.0",
+    "bootstrap": "^3.2.0",
+    "font-awesome": "^4.2.0",
+    "angular-bsfy": "^1.2.23-1",
+    "angular-bootstrap": "^0.11.0",
+    "restangular": "^1.4.0",
+    "lodash": "^2.4.1",
+    "angular-ui-router": "^0.2.10"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "browserify": "^5.11.0",
+    "gulp-browserify": "^0.5.0",
+    "gulp-nodemon": "^1.0.4",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.4.0",
+    "gulp-less": "^1.3.5",
+    "gulp-jade": "^0.8.0",
+    "browserify-shim": "^3.7.0",
+    "run-sequence": "^0.3.6"
+  },
+  "browser": {},
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {}
+}

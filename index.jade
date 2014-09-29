@@ -1,0 +1,47 @@
+html(lang='en' ng-app='NinjaApp')
+  head
+    title Ninja App from above
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/assets/styles/core.css')
+    script(src='/assets/js/bundle.js')
+
+  body(ng-controller='UserInformationCtrl')
+    div.navbar.navbar-default.navbar-fixed-top
+      div.container
+        div.navbar-header
+          a.navbar-brand(ui-sref='index')
+            img.navbar-logo(src='/assets/media/logo-symbol-64x64.png')
+            span.navbar-brand-label {{projectName}}
+          button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        div.navbar-collapse.my-navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li: a(ui-sref='index') Home
+            li: a(ui-sref='about') About
+            li: a(ui-sref='signup') Sign Up
+            li: a(ui-sref='contact') Contact
+          ul.nav.navbar-nav.navbar-right
+            li: a(ng-if='currentUser' ui-sref='account')
+              i.fa.fa-user
+              | {{ currentUser.name }}
+            li: a(ng-if='currentUser' data-ng-controller='LogoutCtrl' data-ng-click='logout()') Logout
+            li: a(ng-if='!currentUser' ui-sref='login')
+              i.fa.fa-user
+              |  Sign In
+          //
+            li: a(ng-if='isAuthorized(userRoles.user)') You're user
+            li: a(ng-if='isAuthorized(userRoles.admin)') You're admin
+
+    div.page
+      div.container(ui-view='')
+
+    div.footer
+      div.container
+        span.copyright.pull-right
+          |&#169; {{copyrightYear}} {{copyrightName}}
+        ul.links
+          li: a(href='/') Home
+          li: a(href='/contact/') Contact
+        div.clearfix
