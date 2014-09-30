@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = ['$scope', 'USER_ROLES', 'AuthService', function ($scope, USER_ROLES, AuthService) {
+module.exports = ['$scope', 'USER_ROLES', 'AuthService', '$cookieStore', 'Session', function ($scope, USER_ROLES, AuthService, $cookieStore, Session) {
   $scope.currentUser = null
   $scope.userRoles = USER_ROLES
   $scope.isAuthorized = AuthService.isAuthorized
 
-    // Login if there are cookies
+  // Login if there are cookies
   if ($cookieStore.get('username') && $cookieStore.get('key') && !AuthService.isAuthenticated()) {
     var username = $cookieStore.get('username')
     var key = $cookieStore.get('key')

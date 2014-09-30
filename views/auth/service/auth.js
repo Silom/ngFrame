@@ -7,8 +7,8 @@ module.exports = ['$http', 'Restangular', 'Session', function ($http, Restangula
   authService.login = function (credentials) {
     return Restangular.service('login').post(credentials)
     .then(function (res) {
-      Session.create(res.key, res.username, 'user')//res.role
-      return {name: res.username, role: 'user'}
+      Session.create(res.session.key, res.session.username, 'user')
+      return {name: res.session.username, role: 'user'}
     })
   }
 

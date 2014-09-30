@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ['Restangular', '$cookies', '$cookieStore', function (Restangular, $cookies, $cookieStore) {
+module.exports = ['Restangular', '$cookieStore', function (Restangular, $cookieStore) {
   this.create = function (sessionKey, userId, userRole) {
     this.key = sessionKey
     this.username = userId
