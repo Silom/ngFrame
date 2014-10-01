@@ -22,7 +22,8 @@ var customModules = [
   require('./views/home/index'),
   require('./views/about/index'),
   require('./views/auth/index'),
-  require('./views/account/index')
+  require('./views/account/index'),
+  require('./views/contact/index')
 ]
 
 // Add the module name of each custom module to our app dependencies
