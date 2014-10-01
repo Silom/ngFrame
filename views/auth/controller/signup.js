@@ -1,7 +1,7 @@
 'use strict';
 module.exports = ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function ($scope, $rootScope, AUTH_EVENTS, AuthService, $location) {
   if (AuthService.isAuthenticated())
-     return $location.path('/account')
+     return $location.path('/account/')
 
   $scope.credentials = {
     name: '',
