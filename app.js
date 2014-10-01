@@ -19,11 +19,11 @@ var appDependencies = [
 
 // Load all feature into this array
 var customModules = [
-  require('./views/home/index'),
-  require('./views/about/index'),
-  require('./views/auth/index'),
-  require('./views/account/index'),
-  require('./views/contact/index')
+  require('./views/home'),
+  require('./views/about'),
+  require('./views/auth'),
+  require('./views/account'),
+  require('./views/contact')
 ]
 
 // Add the module name of each custom module to our app dependencies
