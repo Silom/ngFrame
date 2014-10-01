@@ -2,7 +2,6 @@
 
 module.exports = ['$http', 'Restangular', 'Session', function ($http, Restangular, Session) {
   var authService = {}
-  Restangular.setBaseUrl('/')
 
   authService.login = function (credentials) {
     return Restangular.service('login').post(credentials)
