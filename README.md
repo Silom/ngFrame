@@ -4,7 +4,23 @@ ngFrame is a front end for [Frame](git@github.com:jedireza/frame.git)
 
 *Please note, this project is at a very early point.*
 
-*If you want to try it out, use this [Frame fork](https://github.com/Silom/frame)*
+## Setup
+
+If you want to try it out, use this [Frame fork](https://github.com/Silom/frame).
+I had to make changes to get the views, assets and CORS right.
+Read the setup introduction careful.
+
+For the front end you need to make only one change.
+In the *app.js* you can find in line 42 the Restangular Provider. You have to set there the socket of your api.
+If you run your server locally, you can write ``localhost:8001``.
+
+*app.js*
+```
+...
+RestangularProvider.setBaseUrl('http://192.168.101.101:8001/')
+...
+```
+
 
 ## Technology
 

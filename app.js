@@ -33,8 +33,13 @@ customModules.forEach(function(model) {
 // Construct app
 var app = angular.module('NinjaApp', appDependencies)
 
-app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', 'USER_ROLES', function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, USER_ROLES) {
+app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', 'USER_ROLES', 'RestangularProvider', function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, USER_ROLES, RestangularProvider) {
   $locationProvider.html5Mode(true)
+
+  // Cors
+  $httpProvider.defaults.useXDomain = true
+  delete $httpProvider.defaults.headers.common['X-Requested-With']
+  RestangularProvider.setBaseUrl('http://192.168.101.101:8001/')
 
   // Since I want feature sorted modules you can find all routes in the module itself
   customModules.forEach(function(model) {
