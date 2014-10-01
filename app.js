@@ -33,6 +33,10 @@ customModules.forEach(function(model) {
 // Construct app
 var app = angular.module('NinjaApp', appDependencies)
 
+// Globals
+app.controller('AppInformations', require('./config.js'))
+
+// Basic app configs
 app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', 'USER_ROLES', 'RestangularProvider', function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, USER_ROLES, RestangularProvider) {
   $locationProvider.html5Mode(true)
 
