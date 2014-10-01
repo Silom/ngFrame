@@ -10,7 +10,6 @@ div.row(ng-controller='LoginCtrl')
         label.control-label Password:
         input.form-control(type='password' ng-model='credentials.password' name='password' required)
       div.form-actions
-        button.btn.btn-primary#submit-login(type='submit' ng-disabled='loginform.$invalid') Sign In
+        button.btn.btn-primary(type='submit' ng-disabled='loginform.$invalid') Sign In
         |&nbsp;
         a.btn.btn-link(href='/login/forgot/') Forget your password?
-        a.btn.btn-link(href='/signup/') Signup here

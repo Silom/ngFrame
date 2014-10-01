@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ['$http', 'Restangular', 'Session', function ($http, Restangular, Session) {
+module.exports = ['Restangular', 'Session', function (Restangular, Session) {
   var authService = {}
 
   authService.login = function (credentials) {
@@ -38,11 +38,3 @@ module.exports = ['$http', 'Restangular', 'Session', function ($http, Restangula
 
   return authService
 }]
-
-/*
-    signup: function (name, username, password, email, callback) {
-      return
-    },
-
-  }
-}]*/
