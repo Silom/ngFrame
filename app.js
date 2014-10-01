@@ -35,16 +35,16 @@ customModules.forEach(function(model) {
 var app = angular.module('NinjaApp', appDependencies)
 
 // Globals
-app.controller('AppInformations', require('./config.js'))
+app.controller('AppInformations', require('./config.js').varCtrl)
 
 // Basic app configs
-app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', 'USER_ROLES', 'RestangularProvider', function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, USER_ROLES, RestangularProvider) {
+app.config(['$stateProvider', '$locationProvider', '$httpProvider', 'USER_ROLES', 'RestangularProvider', function($stateProvider, $locationProvider, $httpProvider, USER_ROLES, RestangularProvider) {
   $locationProvider.html5Mode(true)
 
   // Cors
   $httpProvider.defaults.useXDomain = true
   delete $httpProvider.defaults.headers.common['X-Requested-With']
-  RestangularProvider.setBaseUrl('http://192.168.101.101:8001/')
+  RestangularProvider.setBaseUrl(require('./config.js').apiOrigin)
 
   // Since I want feature sorted modules you can find all routes in the module itself
   customModules.forEach(function(model) {
@@ -55,29 +55,5 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpP
   $stateProvider.state('404', {
     url: '*path',
     templateUrl: './views/http/404.html'
-  })
-
-  // Config for Auth
-  $httpProvider.interceptors.push(['$injector', function ($injector) {
-    return $injector.get('AuthInterceptor')
-  }])
-}])
-
-// Auth behaviour
-app.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function ($rootScope, AUTH_EVENTS, AuthService) {
-  $rootScope.$on('$stateChangeStart', function (event, next) {
-    // if next.data will check if any validation role is given
-    if (next.data) {
-      if (!AuthService.isAuthorized(next.data.authorizedRoles)) {
-        event.preventDefault()
-        if (AuthService.isAuthenticated()) {
-          // user is not allowed
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized)
-        } else {
-          // user is not logged in
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
-        }
-      }
-    }
   })
 }])

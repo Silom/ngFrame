@@ -21,7 +21,7 @@ html(lang='en' ng-app='NinjaApp')
             ul.nav.navbar-nav
               li: a(ui-sref='index') Home
               li: a(ui-sref='about') About
-              li: a(ui-sref='signup') Sign Up
+              li: a(ng-if='!currentUser' ui-sref='signup') Sign Up
               li: a(ui-sref='contact') Contact
             ul.nav.navbar-nav.navbar-right
               li: a(ng-if='currentUser' ui-sref='account')

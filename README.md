@@ -11,16 +11,13 @@ I had to make changes to get the views, assets and CORS right.
 Read the setup introduction careful.
 
 For the front end you need to make only one change.
-In the *app.js* you can find in line 42 the Restangular Provider. You have to set there the socket of your api.
-If you run your server locally, you can write ``localhost:8001``.
 
-*app.js*
-```
-...
-RestangularProvider.setBaseUrl('http://192.168.101.101:8001/')
-...
-```
+Open ``config.js`` and enter your api origin, if you run your server locally, you can write ``localhost:8001``.
 
+*config.js*
+```
+exports.apiOrigin = 'http://192.168.101.101:8001/'
+```
 
 ## Technology
 

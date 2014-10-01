@@ -16,4 +16,29 @@ authModule.service('Session', require('./service/session'))
 
 authModule.routings = require('./routes')
 
+// Auth behaviour
+authModule.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function ($rootScope, AUTH_EVENTS, AuthService) {
+  $rootScope.$on('$stateChangeStart', function (event, next) {
+    // if next.data will check if any validation role is given
+    if (next.data) {
+      if (!AuthService.isAuthorized(next.data.authorizedRoles)) {
+        event.preventDefault()
+        if (AuthService.isAuthenticated()) {
+          // user is not allowed
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized)
+        } else {
+          // user is not logged in
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
+        }
+      }
+    }
+  })
+}])
+
+authModule.config(['$httpProvider', function ($httpProvider) {
+  $httpProvider.interceptors.push(['$injector', function ($injector) {
+    return $injector.get('AuthInterceptor')
+  }])
+}])
+
 module.exports = authModule
