@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function ($scope, $rootScope, AUTH_EVENTS, AuthService, $location) {
+module.exports = ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$state', function ($scope, $rootScope, AUTH_EVENTS, AuthService, $state) {
   if (AuthService.isAuthenticated())
-     return $location.path('/account/')
+     return $state.go('account')
 
   $scope.credentials = {
     username: '',
@@ -14,7 +14,7 @@ module.exports = ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$locati
       $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
       $scope.setCurrentUser(user)
       // Forward user
-      $location.path('/account/')
+      $state.go('account')
     }, function () {
       $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
     })

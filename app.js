@@ -38,7 +38,7 @@ var app = angular.module('NinjaApp', appDependencies)
 app.controller('AppInformations', require('./config.js').varCtrl)
 
 // Basic app configs
-app.config(['$stateProvider', '$locationProvider', '$httpProvider', 'USER_ROLES', 'RestangularProvider', function($stateProvider, $locationProvider, $httpProvider, USER_ROLES, RestangularProvider) {
+app.config(['$stateProvider', '$locationProvider', '$httpProvider', 'USER_ROLES', 'RestangularProvider', '$urlRouterProvider', function($stateProvider, $locationProvider, $httpProvider, USER_ROLES, RestangularProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true)
 
   // Cors

@@ -17,7 +17,7 @@ authModule.service('Session', require('./service/session'))
 authModule.routings = require('./routes')
 
 // Auth behaviour
-authModule.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function ($rootScope, AUTH_EVENTS, AuthService) {
+authModule.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$state', function ($rootScope, AUTH_EVENTS, AuthService, $state) {
   $rootScope.$on('$stateChangeStart', function (event, next) {
     // if next.data will check if any validation role is given
     if (next.data) {
@@ -32,6 +32,14 @@ authModule.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function ($rootScope
         }
       }
     }
+  })
+
+  $rootScope.$on('auth-not-authenticated', function (event) {
+    $state.go('login')
+  })
+
+  $rootScope.$on('auth-not-notAuthorized', function (event) {
+    $state.go('/')
   })
 }])
 
