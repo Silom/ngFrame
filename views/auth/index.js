@@ -1,52 +1,16 @@
 'use strict';
 
-var authModule = angular.module('authModule', [])
+var authModule = angular.module('client-side-auth', [])
 
-authModule.constant('AUTH_EVENTS', require('./constant/auth_events'))
-authModule.constant('USER_ROLES', require('./constant/user_roles'))
-
-authModule.controller('UserInformationCtrl', require('./controller/userInformation'))
+authModule.controller('NavCtrl', require('./controller/nav'))
 authModule.controller('LoginCtrl', require('./controller/login'))
-authModule.controller('SignupCtrl', require('./controller/signup'))
-authModule.controller('LogoutCtrl', require('./controller/logout'))
+authModule.controller('RegisterCtrl', require('./controller/register'))
+authModule.controller('AdminCtrl', require('./controller/admin'))
 
-authModule.factory('AuthInterceptor', require('./service/authInterceptor'))
-authModule.factory('AuthService', require('./service/auth'))
-authModule.service('Session', require('./service/session'))
+authModule.directive('accessLevel', require('./directives').accessLevel)
+authModule.directive('activeNav', require('./directives').activeNav)
 
-authModule.routings = require('./routes')
-
-// Auth behaviour
-authModule.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$state', function ($rootScope, AUTH_EVENTS, AuthService, $state) {
-  $rootScope.$on('$stateChangeStart', function (event, next) {
-    // if next.data will check if any validation role is given
-    if (next.data) {
-      if (!AuthService.isAuthorized(next.data.authorizedRoles)) {
-        event.preventDefault()
-        if (AuthService.isAuthenticated()) {
-          // user is not allowed
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized)
-        } else {
-          // user is not logged in
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
-        }
-      }
-    }
-  })
-
-  $rootScope.$on('auth-not-authenticated', function (event) {
-    $state.go('login')
-  })
-
-  $rootScope.$on('auth-not-notAuthorized', function (event) {
-    $state.go('/')
-  })
-}])
-
-authModule.config(['$httpProvider', function ($httpProvider) {
-  $httpProvider.interceptors.push(['$injector', function ($injector) {
-    return $injector.get('AuthInterceptor')
-  }])
-}])
+authModule.factory('Auth', require('./services').Auth)
+authModule.factory('Users', require('./services').Users)
 
 module.exports = authModule

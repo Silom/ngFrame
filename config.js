@@ -7,5 +7,3 @@ exports.varCtrl = ['$scope', function ($scope) {
     projectName: 'ngFrame'
   }
 }]
-
-exports.apiOrigin = 'http://192.168.101.101:8001/'

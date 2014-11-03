@@ -1,15 +1,15 @@
-div.row(ng-controller='LoginCtrl')
+div.row
   div.col-sm-6
     div.page-header
       h1 Sign In
-    form(ng-submit='login(credentials)' name='loginform' novalidate)
+    form(ng-submit='login()' name='loginForm' novalidate)
       div.form-group
         label.control-label Username or Email:
-        input.form-control(type='text' ng-model='credentials.username' name='username' required)
+        input.form-control(type='text' ng-model='username' name='username' required)
       div.form-group
         label.control-label Password:
-        input.form-control(type='password' ng-model='credentials.password' name='password' required)
+        input.form-control(type='password' ng-model='password' name='password' required)
       div.form-actions
-        button.btn.btn-primary(type='submit' ng-disabled='loginform.$invalid') Sign In
+        button.btn.btn-primary(type='submit' ng-disabled='loginForm.$invalid') Sign In
         |&nbsp;
         a.btn.btn-link(href='/login/forgot/') Forget your password?

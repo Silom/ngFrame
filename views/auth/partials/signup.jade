@@ -1,19 +1,19 @@
-div.row(ng-controller='SignupCtrl')
+div.row
   div.col-sm-6
     div.page-header
       h1 Sign Up
-    form(ng-submit='signup(credentials)' name='signupform' novalidate)
+    form(ng-submit='register()' name='registerForm' novalidate)
       div.form-group
         label.control-label Your Name:
-        input.form-control(type='text' ng-model='credentials.name' name='name' required)
+        input.form-control(type='text' ng-model='name' name='name' required)
       div.form-group
         label.control-label Username:
-        input.form-control(type='text' ng-model='credentials.username' name='username' required)
+        input.form-control(type='text' ng-model='username' name='username' required)
       div.form-group
         label.control-label Email:
-        input.form-control(type='text' ng-model='credentials.email' name='email' required)
+        input.form-control(type='text' ng-model='email' name='email' required)
       div.form-group
         label.control-label Password:
-        input.form-control(type='password' ng-model='credentials.password' name='password' required)
+        input.form-control(type='password' ng-model='password' name='password' required)
       div.form-actions
-        button.btn.btn-primary#submit-signup(type='submit' ng-disabled='signupform.$invalid') Sign In
+        button.btn.btn-primary(type='submit' ng-disabled='registerForm.$invalid') Sign In

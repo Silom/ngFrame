@@ -1,48 +1,70 @@
-html(lang='en' ng-app='NinjaApp')
+html(lang='en' ng-app='FrameApp')
   head
-    title Ninja App from above
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/assets/styles/core.css')
-    script(src='/assets/js/bundle.js')
+    title NgFrame
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='/assets/styles/core.css')
 
-  body(ng-controller='AppInformations')
-    div(ng-controller='UserInformationCtrl')
-      div.navbar.navbar-default.navbar-fixed-top
-        div.container
-          div.navbar-header
-            a.navbar-brand(ui-sref='index')
-              img.navbar-logo(src='/assets/media/logo-symbol-64x64.png')
-              span.navbar-brand-label {{appVars.projectName}}
-            button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-          div.navbar-collapse.my-navbar-collapse.collapse
-            ul.nav.navbar-nav
-              li: a(ui-sref='index') Home
-              li: a(ui-sref='about') About
-              li: a(ng-if='!currentUser' ui-sref='signup') Sign Up
-              li: a(ui-sref='contact') Contact
-            ul.nav.navbar-nav.navbar-right
-              li: a(ng-if='currentUser' ui-sref='account')
-                i.fa.fa-user
-                | {{ currentUser.name }}
-              li: a(ng-if='currentUser' data-ng-controller='LogoutCtrl' data-ng-click='logout()') Logout
-              li: a(ng-if='!currentUser' ui-sref='login')
+  body(ng-cloak ng-controller='AppInformations')
+    div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavCtrl')
+      div.container
+        div.navbar-header
+          a.navbar-brand(href='/')
+            img.navbar-logo(src='/assets/media/logo-symbol-64x64.png')
+            span.navbar-brand-label {{appVars.projectName}}
+          button.navbar-toggle.collapsed(data-toggle='collapse' data-target='.my-navbar-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        div.navbar-collapse.my-navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li(data-access-level='accessLevels.anon' active-nav)
+              a(href='/') Home
+            li(data-access-level='accessLevels.anon' active-nav)
+              a(href='/about/') About
+            li(data-access-level='accessLevels.anon' active-nav)
+              a(href='/register/') Sign Up
+            li(data-access-level='accessLevels.anon' active-nav)
+              a(href='/contact/') Contact
+          ul.nav.navbar-nav.navbar-right
+            li(access-level='accessLevels.user')
+              a(href="" data-ng-click="logout()")
+            li(access-level='accessLevels.anon')
+              a(href='/login/')
                 i.fa.fa-user
                 |  Sign In
-            //
-              li: a(ng-if='isAuthorized(userRoles.user)') You're user
-              li: a(ng-if='isAuthorized(userRoles.admin)') You're admin
 
-      div.page
-        div.container(ui-view='')
+    div.page
+      div.container(ui-view='')
 
-      div.footer
-        div.container
-          span.copyright.pull-right
-            |&#169; {{appVars.copyrightYear}} {{appVars.companyName}}
-          ul.links
-            li: a(href='/') Home
-            li: a(href='/contact/') Contact
-          div.clearfix
+    div.footer
+      div.container
+        span.copyright.pull-right
+          |&#169; {{appVars.copyrightYear}} {{appVars.companyName}}
+        ul.links
+          li: a(href='/') Home
+          li: a(href='/contact/') Contact
+        div.clearfix
+
+    script(type="text/ng-template" id="404")
+      include views/http/404
+    script(type="text/ng-template" id="admin")
+      include views/account/partials/index
+    script(type="text/ng-template" id="home")
+      include views/home/partials/index
+    script(type="text/ng-template" id="login")
+      include views/auth/partials/login
+    script(type="text/ng-template" id="register")
+      include views/auth/partials/signup
+
+
+
+    script(type="text/ng-template" id="private/layout")
+      //include partials/private/layout
+    script(type="text/ng-template" id="private/home")
+      //include partials/private/home
+    script(type="text/ng-template" id="private/nested")
+      //include partials/private/nested
+    script(type="text/ng-template" id="private/nestedAdmin")
+      //include partials/private/nestedAdmin
+
+    script(src='/assets/js/bundle.js')

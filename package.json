@@ -7,13 +7,10 @@
     "start": "gulp"
   },
   "dependencies": {
-    "underscore": "^1.7.0",
-    "async": "^0.9.0",
     "bootstrap": "^3.2.0",
     "font-awesome": "^4.2.0",
     "angular-bsfy": "^1.2.23-1",
     "angular-bootstrap": "^0.11.0",
-    "restangular": "^1.4.0",
     "lodash": "^2.4.1",
     "angular-ui-router": "^0.2.10"
   },

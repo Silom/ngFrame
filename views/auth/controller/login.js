@@ -1,22 +1,21 @@
 'use strict';
 
-module.exports = ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', '$state', function ($scope, $rootScope, AUTH_EVENTS, AuthService, $state) {
-  if (AuthService.isAuthenticated())
-     return $state.go('account')
+module.exports = ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
+  $scope.rememberme = true;
+  $scope.login = function() {
+    Auth.login({
+        username: $scope.username,
+        password: $scope.password
+      },
+      function(res) {
+        $location.path('/')
+      },
+      function(err) {
+        $rootScope.error = "Failed to login"
+      });
+  };
 
-  $scope.credentials = {
-    username: '',
-    password: ''
-  }
-
-  $scope.login = function (credentials) {
-    AuthService.login(credentials).then(function (user) {
-      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
-      $scope.setCurrentUser(user)
-      // Forward user
-      $state.go('account')
-    }, function () {
-      $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
-    })
-  }
-}]
+  $scope.loginOauth = function(provider) {
+    $window.location.href = '/auth/' + provider
+  };
+}];

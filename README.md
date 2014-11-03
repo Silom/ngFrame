@@ -1,23 +1,23 @@
 # ngFrame
 
-ngFrame is a front end for [Frame](git@github.com:jedireza/frame.git)
+ngFrame is a front end for [Frame](git@github.com:jedireza/frame.git). The main idea is to rewrite the [Drywall](https://github.com/jedireza/drywall) Front end in Angular.js.
 
-*Please note, this project is at a very early point.*
+*Please note, this project is at a very early point. Most of the stuff from Drywall isn't included yet. Check this [task](https://github.com/Silom/ngFrame/issues/2) for more informations.*
 
 ## Setup
 
 If you want to try it out, use this [Frame fork](https://github.com/Silom/frame).
-I had to make changes to get the views, assets and CORS right.
-Read the setup introduction careful.
+I had to make changes to get the views and assets right.
 
-For the front end you need to make only one change.
+After installing Frame, install Gulp:
 
-Open ``config.js`` and enter your api origin, if you run your server locally, you can write ``localhost:8001``.
+``
+npm install gulp -g
+``
 
-*config.js*
-```
-exports.apiOrigin = 'http://192.168.101.101:8001/'
-```
+Run Project with ``gulp``.
+
+Start customizing.
 
 ## Technology
 
