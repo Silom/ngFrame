@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function ($stateProvider, USER_ROLES) {
+module.exports = function ($stateProvider, access) {
   $stateProvider
-  .state('about', {
+  .state('public.about', {
     url: '/about/',
-    templateUrl: __dirname + '/partials/index.html'
+    templateUrl: 'about'
   })
 }

@@ -1,9 +1,10 @@
 'use strict';
 
-module.exports = function ($stateProvider, USER_ROLES) {
+module.exports = function ($stateProvider, access) {
   $stateProvider
-  .state('contact', {
+  .state('public.contact', {
     url: '/contact/',
-    templateUrl: __dirname + '/partials/index.html'
+    templateUrl: 'contact',
+    controller: 'ContactCtrl'
   })
 }

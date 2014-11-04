@@ -1,9 +1,9 @@
 'use strict';
 
-exports.Auth = function($http, $cookieStore) {
+module.exports = function($http, $cookieStore) {
 
-  var accessLevels = require('./routingConfig.js').accessLevels,
-      userRoles = require('./routingConfig.js').userRoles,
+  var accessLevels = require('../routingConfig.js').accessLevels,
+      userRoles = require('../routingConfig.js').userRoles,
       currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public }
 
   $cookieStore.remove('user')
@@ -74,13 +74,5 @@ exports.Auth = function($http, $cookieStore) {
     accessLevels: accessLevels,
     userRoles: userRoles,
     user: currentUser
-  }
-}
-
-exports.Users = function($http) {
-  return {
-    getAll: function(success, error) {
-      $http.get('/api/users').success(success).error(error)
-    }
   }
 }

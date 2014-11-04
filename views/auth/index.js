@@ -10,7 +10,9 @@ authModule.controller('AdminCtrl', require('./controller/admin'))
 authModule.directive('accessLevel', require('./directives').accessLevel)
 authModule.directive('activeNav', require('./directives').activeNav)
 
-authModule.factory('Auth', require('./services').Auth)
-authModule.factory('Users', require('./services').Users)
+authModule.factory('Auth', require('./service/authFactory'))
+authModule.factory('Users', require('./service/usersFactory'))
+
+authModule.routings = require('./routes.js')
 
 module.exports = authModule
