@@ -2,16 +2,16 @@ div.row
   div.col-sm-6
     div.page-header
       h1 Send A Message
-    form(ng-submit='contact(credentials)' name='contactform' novalidate)
+    form(ng-submit='contact()' name='contactform' novalidate)
       div.form-group
         label Your Name:
-        input.form-control(type='text' ng-model='credentials.name' name='name' required)
+        input.form-control(type='text' ng-model='name' name='name' required)
       div.form-group
         label Your Email:
-        input.form-control(type='text' ng-model='credentials.email' name='email' required)
+        input.form-control(type='text' ng-model='email' name='email' required)
       div.form-group
         label Message:
-        textarea.form-control(name='message' ng-model='credentials.message' rows='5' required)
+        textarea.form-control(name='message' ng-model='message' rows='5' required)
       div.form-group
         button.btn.btn-primary(type='submit' ng-disabled='contactform.$invalid') Send Message
 

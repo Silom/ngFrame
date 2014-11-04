@@ -1,18 +1,17 @@
 'use strict';
 
-module.exports = ['$scope', '$location', 'ContactService', function($scope, $location, ContactService) {
-  $scope.credentials = {
-    name: '',
-    email: '',
-    message: ''
+module.exports = function($rootScope, $scope, $location, ContactService) {
+  $scope.contact = function() {
+    ContactService.contact({
+        name: $scope.name,
+        email: $scope.email,
+        message: $scope.message
+      },
+      function() {
+        $location.path('/');
+      },
+      function(err) {
+        $rootScope.error = err
+      })
   }
-
-  $scope.contact = function (credentials) {
-    ContactService.contact(credentials).then(function (user) {
-      //$rootScope.$broadcast(AUTH_EVENTS.sendSuccess)
-      $location.path('/contact/')
-    }, function () {
-      //$rootScope.$broadcast(AUTH_EVENTS.sendFailed)
-    })
-  }
-}]
+}
