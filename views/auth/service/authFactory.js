@@ -25,14 +25,8 @@ module.exports = function(localStorageService, $http) {
 
       return accessLevel.bitMask & role.bitMask
     },
-    isLoggedIn: function(user) {
-      if (user === undefined)
-        user = currentUser
-      return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title
-    },
     register: function(user, success, error) {
-      $http.post('/api/register', user).success(function(res) {
-        changeUser(res)
+      $http.post('/api/signup', user).success(function(res) {
         success()
       }).error(error)
     },
@@ -60,6 +54,8 @@ module.exports = function(localStorageService, $http) {
               }
             }
           }
+          //new users don't get a role by default from frame FIXME
+          return userRoles.user
         }
 
         metaUser.key = user.session.key

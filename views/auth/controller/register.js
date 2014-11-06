@@ -6,12 +6,13 @@ module.exports = ['$rootScope', '$scope', '$location', 'Auth', function($rootSco
 
   $scope.register = function() {
     Auth.register({
+        name: $scope.name,
         username: $scope.username,
         password: $scope.password,
-        role: $scope.role
+        email: $scope.email
       },
       function() {
-        $location.path('/');
+        $location.path('/login');
       },
       function(err) {
         $rootScope.error = err
