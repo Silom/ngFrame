@@ -9,7 +9,7 @@ module.exports = ['$rootScope', '$scope', '$location', 'Auth', function($rootSco
     Auth.logout(function() {
       $location.path('/login')
     }, function() {
-      $rootScope.error = "Failed to logout"
+      $location.path('/login')// do nothing, local stuff is gone anyway
     })
   }
 }]

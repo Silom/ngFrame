@@ -3,11 +3,19 @@ module.exports = function(localStorageService, $http) {
 
   var accessLevels = require('../routingConfig.js').accessLevels,
       userRoles = require('../routingConfig.js').userRoles,
-      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public }
+      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public, key: null }
+
+  if (currentUser.key)
+    setAuthHeader(currentUser)
+
+  function setAuthHeader(user) {
+    $http.defaults.headers.common['Authorization'] = 'Basic ' + new Buffer(user.username + ':' + user.key).toString('base64')
+  }
 
   function changeUser(user) {
     angular.extend(currentUser, user)
     localStorageService.set('userStorage', user)
+    setAuthHeader(user)
   }
 
   return {
@@ -32,7 +40,8 @@ module.exports = function(localStorageService, $http) {
       $http.post('/api/login', user).success(function(user) {
         var metaUser = {
           username: '',
-          role: {}
+          role: {},
+          key: ''
         }
 
         // I assume there is only one user role, but I have to check on that one TODO
@@ -53,6 +62,7 @@ module.exports = function(localStorageService, $http) {
           }
         }
 
+        metaUser.key = user.session.key
         metaUser.role = getRole(user.user)
         metaUser.username = user.user.username
 
@@ -61,11 +71,13 @@ module.exports = function(localStorageService, $http) {
       }).error(error)
     },
     logout: function(success, error) {
-      $http.post('/api/logout').success(function() {
-        changeUser({
-          username: '',
-          role: userRoles.public
-        })
+      // Empty befor backend call, so the user is not confused. On a 'relogin' the server will provide the same key again.
+      localStorageService.remove('userStorage')
+      changeUser({
+        username: '',
+        role: userRoles.public
+      })
+      $http.delete('/api/logout').success(function() {
         success()
       }).error(error)
     },
