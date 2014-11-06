@@ -12,7 +12,7 @@ module.exports = ['$rootScope', '$scope', '$location', 'Auth', function($rootSco
         email: $scope.email
       },
       function() {
-        $location.path('/login');
+        $location.path('/login')
       },
       function(err) {
         $rootScope.error = err

@@ -8,7 +8,7 @@ var config = {
   accessLevels : {
     'public' : "*",
     'anon': ['public'],
-    'user' : ['user', 'admin'],
+    'user' : ['user'],
     'admin': ['admin']
   }
 }

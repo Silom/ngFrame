@@ -1,9 +1,9 @@
+'use strict';
 
-
-/*
-    .state('admin.admin', {
-        url: '/admin/',
-        templateUrl: 'admin',
-        controller: 'AdminCtrl'
-    })
-*/
+module.exports = function ($stateProvider, access) {
+  $stateProvider
+  .state('admin.dashboard', {
+    url: '',
+    templateUrl: 'admin/dashboard'
+  })
+}

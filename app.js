@@ -17,6 +17,7 @@ var appDependencies = [
 var customModules = [
   require('./views/home'),
   require('./views/about'),
+  require('./views/admin'),
   require('./views/account'),
   require('./views/contact'),
   require('./views/auth')
@@ -53,8 +54,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
         access: access.anon
       }
     })
-    .state('user', {
+    .state('account', {
       abstract: true,
+      url: '/account/',
       template: "<ui-view/>",
       data: {
         access: access.user
@@ -62,6 +64,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
     })
     .state('admin', {
       abstract: true,
+      url: '/admin/',
       template: "<ui-view/>",
       data: {
         access: access.admin

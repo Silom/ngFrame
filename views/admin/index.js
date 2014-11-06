@@ -1,6 +1,6 @@
 'use strict';
 
-var pageModule = angular.module('accountPageModule', [])
+var pageModule = angular.module('adminPageModule', [])
 
 pageModule.routings = require('./routes')
 
