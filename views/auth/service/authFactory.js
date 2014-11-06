@@ -74,7 +74,7 @@ module.exports = function(localStorageService, $http) {
       $http.delete('/api/logout').success(function() {
         success()
       }).error(error)
-      
+
       // Empty even on failure, so the user is not confused. On a 'relogin' the server will provide the same key again.
       localStorageService.remove('userStorage')
       changeUser({
