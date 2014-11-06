@@ -1,15 +1,13 @@
 'use strict';
-
-module.exports = function($http, $cookieStore) {
+module.exports = function(localStorageService, $http) {
 
   var accessLevels = require('../routingConfig.js').accessLevels,
       userRoles = require('../routingConfig.js').userRoles,
-      currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public }
-
-  $cookieStore.remove('user')
+      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public }
 
   function changeUser(user) {
     angular.extend(currentUser, user)
+    localStorageService.set('userStorage', user)
   }
 
   return {

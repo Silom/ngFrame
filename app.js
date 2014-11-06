@@ -1,16 +1,15 @@
 'use strict'
 
 // Get all the Angulars
-var angular = require('angular-bsfy'),
-    ngCookies = require('angular-bsfy/cookies')
+var angular = require('angular-bsfy')
 
 require('angular-bootstrap')
 
 // Load all the Angulars
 var appDependencies = [
-  ngCookies.name,
   'ui.bootstrap',
   require('angular-ui-router'),
+  require('angular-bsfy/cookies').name,
   require('./views/auth').name
 ]
 

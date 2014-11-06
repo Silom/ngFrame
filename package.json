@@ -27,9 +27,8 @@
   },
   "browser": {},
   "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
+    "transform": ["browserify-shim"]
   },
-  "browserify-shim": {}
+  "browserify-shim": {
+  }
 }

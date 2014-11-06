@@ -1,6 +1,6 @@
 'use strict';
-
-var authModule = angular.module('client-side-auth', [])
+var localStorage = require('./service/localStorage')
+var authModule = angular.module('client-side-auth', [localStorage.name])
 
 authModule.controller('NavCtrl', require('./controller/nav'))
 authModule.controller('LoginCtrl', require('./controller/login'))
