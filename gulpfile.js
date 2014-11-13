@@ -28,7 +28,7 @@ sources.root = {};
 sources.root.docs = "src/index.jade"
 
 sources.styles = {}
-sources.styles.build = 'src/styles/bundle.less'
+sources.styles.build = 'src/styles/core.less'
 sources.styles.root = 'src/styles/'
 
 sources.components = {}
@@ -48,26 +48,21 @@ sources.assets.images = 'src/media/**/*'
 // Destinations
 destinations.root = 'dist/'
 destinations.components = 'dist/components/'
+destinations.styles = 'dist/styles/'
 
 destinations.assets = {}
 destinations.assets.fonts = 'dist/fonts/'
 destinations.assets.images = 'dist/media/'
 
 // build and watch tasks, the file name is self explaining
+require('./gulp/utils').clean(gulp, destinations.root)
 require('./gulp/less')(gulp, sources, destinations)
 require('./gulp/jade')(gulp, sources, destinations)
 require('./gulp/assets')(gulp, sources, destinations)
 require('./gulp/browserify')(gulp, sources, destinations)
-require('./gulp/utils')(gulp, destinations.root)
 
 // Main trigger
-gulp.task('default', ['app:prebuild'])
-gulp.task('app:prebuild', ['clean', 'app:build'])
-gulp.task('app:build', ['assets:watch', 'browserify', 'bootstrap-build', 'jade:watch'])
-
-gulp.task('bootstrap-build', function() {
-  return gulp.src('src/styles/bootstrap-build.less')
-  .pipe(gulp.plugins.less())
-  .pipe(gulp.plugins.concat('core.css'))
-  .pipe(gulp.dest('./dist/styles/'))
+gulp.task('default', ['app:build'])
+gulp.task('app:build', ['clean'], function () {
+  gulp.plugins.sequence(['assets:watch', 'browserify', 'less:watch', 'jade:watch'])
 })

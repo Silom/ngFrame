@@ -1,27 +1,17 @@
-var plumber = require('gulp-plumber'),
-    watch = require('gulp-watch'),
-    less = require('gulp-less'),
-    autoprefixer = require('gulp-autoprefixer'),
-    concat = require('gulp-concat'),
-    touch = require("touch"),
-    fs = require('fs')
+'use strict';
 
 module.exports = function (gulp, sources, destinations) {
-  gulp.task('less:build', function(event) {
-    return gulp.src([sources.modules.less, sources.components.less, sources.behaviours.less, sources.routes.less])
-      .pipe(plumber())
-      .pipe(less({
+  gulp.task('less:build', function() {
+    return gulp.src(sources.styles.build)
+      .pipe(gulp.plugins.plumber())
+      .pipe(gulp.plugins.less({
         compress: true
       }))
-      .pipe(concat('bundle.css'))
-      .pipe(autoprefixer({
-        browsers: ['last 2 versions'],
-        cascade: false
-      }))
-      .pipe(gulp.dest(destinations.css));
-  });
+      .pipe(gulp.plugins.concat('core.css'))
+      .pipe(gulp.dest(destinations.styles))
+  })
 
-  gulp.task('less:watch', function(event) {
-    watch({glob: sources.less}, ['less:build']);
-  });
-};
+  gulp.task('less:watch', function() {
+    gulp.plugins.watch({glob: sources.less}, ['less:build'])
+  })
+}
