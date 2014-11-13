@@ -26,6 +26,10 @@ html(lang='en' ng-app='FrameApp')
             li(access-level='accessLevels.public' active-nav)
               a(href='/contact/') Contact
           ul.nav.navbar-nav.navbar-right
+            li(access-level='accessLevels.user' active-nav)
+              a(href="/account/") {{ user.username }}
+            li(access-level='accessLevels.admin' active-nav)
+              a(href="/admin/") {{ user.username }}
             li(access-level='accessLevels.user')
               a(href="" ng-click="logout()") Logout
             li(access-level='accessLevels.admin')
@@ -48,25 +52,25 @@ html(lang='en' ng-app='FrameApp')
         div.clearfix
 
     // Public
-    script(type="text/ng-template" id="404")
-      include views/http/404
-    script(type="text/ng-template" id="home")
-      include views/home/partials/index
     script(type="text/ng-template" id="login")
-      include views/auth/partials/login
+      include modules/login/partials/login
     script(type="text/ng-template" id="signup")
-      include views/auth/partials/signup
+      include modules/signup/partials/signup
+    script(type="text/ng-template" id="404")
+      include modules/http/404
+    script(type="text/ng-template" id="home")
+      include modules/home/partials/index
     script(type="text/ng-template" id="contact")
-      include views/contact/partials/index
+      include modules/contact/partials/index
     script(type="text/ng-template" id="about")
-      include views/about/partials/index
+      include modules/about/partials/index
 
     // Admin
     script(type="text/ng-template" id="admin/dashboard")
-      include views/admin/partials/index
+      include modules/admin/partials/index
 
     // Account
     script(type="text/ng-template" id="account/dashboard")
-      include views/account/partials/index
+      include modules/account/partials/index
 
-    script(src='/assets/js/bundle.js')
+    script(src='/assets/bundle.js')

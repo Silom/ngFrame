@@ -13,6 +13,4 @@ authModule.directive('activeNav', require('./directives').activeNav)
 authModule.factory('Auth', require('./service/authFactory'))
 authModule.factory('Users', require('./service/usersFactory'))
 
-authModule.routings = require('./routes.js')
-
 module.exports = authModule
