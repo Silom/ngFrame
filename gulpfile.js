@@ -28,7 +28,7 @@ sources.root = {};
 sources.root.docs = "src/index.jade"
 
 sources.styles = {}
-sources.styles.build = 'src/styles/core.less'
+sources.styles.build = 'src/styles/bootstrap-build.less'
 sources.styles.root = 'src/styles/'
 
 sources.components = {}

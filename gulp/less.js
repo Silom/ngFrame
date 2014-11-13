@@ -4,9 +4,7 @@ module.exports = function (gulp, sources, destinations) {
   gulp.task('less:build', function() {
     return gulp.src(sources.styles.build)
       .pipe(gulp.plugins.plumber())
-      .pipe(gulp.plugins.less({
-        compress: true
-      }))
+      .pipe(gulp.plugins.less())
       .pipe(gulp.plugins.concat('core.css'))
       .pipe(gulp.dest(destinations.styles))
   })

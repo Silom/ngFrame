@@ -73,6 +73,18 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
       url: '/404/',
       templateUrl: '404'
     })
+    
+    .state('anon.login', {
+      url: '/login/',
+      templateUrl: 'login',
+      controller: 'LoginCtrl'
+    })
+    .state('anon.signup', {
+      url: '/signup/',
+      templateUrl: 'signup',
+      controller: 'RegisterCtrl'
+    })
+
 
   // Since I want modules you can find all routes in the module itself
   customModules.forEach(function(model) {
