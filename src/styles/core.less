@@ -1,4 +1,4 @@
-@import "../node_modules/bootstrap/less/mixins.less";
+@import "../../node_modules/bootstrap/less/mixins.less";
 /*
   Allow angular.js to be loaded in body, hiding cloaked elements until
   templates compile.  The !important is important given that there may be
@@ -57,6 +57,12 @@ select, textarea, input, .form-control {
   }
   .navbar-brand-label {
     margin-left: 35px;
+  }
+
+  .navbar-right {
+    a {
+      float: left;
+    }
   }
 }
 

@@ -10,17 +10,16 @@ var appDependencies = [
   'ui.bootstrap',
   require('angular-ui-router'),
   require('angular-bsfy/cookies').name,
-  require('./views/auth').name
+  require('./components/auth').name
 ]
 
 // Load all feature into this array
 var customModules = [
-  require('./views/home'),
-  require('./views/about'),
-  require('./views/admin'),
-  require('./views/account'),
-  require('./views/contact'),
-  require('./views/auth')
+  require('./modules/home'),
+  require('./modules/about'),
+  require('./modules/admin'),
+  require('./modules/account'),
+  require('./modules/contact')
 ]
 
 // Add the module name of each custom module to our app dependencies
@@ -36,7 +35,7 @@ app.controller('AppInformations', require('./config.js').varCtrl)
 
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-  var access = require('./views/auth/routingConfig.js').accessLevels
+  var access = require('./components/auth/routingConfig.js').accessLevels
 
   // Public routes
   $stateProvider
