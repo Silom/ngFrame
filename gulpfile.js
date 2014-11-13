@@ -12,7 +12,6 @@ gulp.plugins = {
   watchify: require('watchify'),
   exorcist: require('exorcist'),
   browserify: require('browserify'),
-  nodemon: require('gulp-nodemon'),
   concat: require('gulp-concat'),
   clean: require('gulp-clean'),
   less: require('gulp-less'),
