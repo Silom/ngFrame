@@ -1,4 +1,5 @@
 'use strict';
+
 var localStorage = require('./service/localStorage')
 var authModule = angular.module('client-side-auth', [localStorage.name])
 
@@ -11,6 +12,5 @@ authModule.directive('accessLevel', require('./directives').accessLevel)
 authModule.directive('activeNav', require('./directives').activeNav)
 
 authModule.factory('Auth', require('./service/authFactory'))
-authModule.factory('Users', require('./service/usersFactory'))
 
 module.exports = authModule
