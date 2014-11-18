@@ -12,7 +12,7 @@ module.exports = function (gulp, sources, destinations) {
     b.add('./src/app.js')
 
     // So we can use fs
-    b.transform('brfs')
+    b.transform('jadeify')
 
     b = gulp.plugins.watchify(b)
 

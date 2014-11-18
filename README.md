@@ -9,13 +9,14 @@ ngFrame is a front end for [Frame](git@github.com:jedireza/frame.git). The main 
 If you want to try it out, use this [Frame fork](https://github.com/Silom/frame).
 I had to make changes to get the views and assets right.
 
-After installing Frame, install Gulp:
+After installing Frame, install Gulp and all node packages:
 
 ``
 npm install gulp -g
+npm install
 ``
 
-Run Project with ``gulp``.
+Run Project with ``gulp`` or ``npm start``.
 
 Start customizing.
 
@@ -25,12 +26,11 @@ Start customizing.
 | -------------- | ----------- |
 | Bootstrap      | Gulp        |
 | Angular.js     | Browserify  |
-| Lodash         |             |
 | Font-Awesome   |             |
 
 ## Philosophy
 
-* 'Clone' the Drywall front end and rewrite it an Angular
+* 'Clone' the Drywall front end and rewrite it in Angular
 * Don't include a back end
 * Create a website and user system.
 * It's just JavaScript

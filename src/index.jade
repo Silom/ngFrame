@@ -51,26 +51,4 @@ html(lang='en' ng-app='FrameApp')
           li: a(href='/contact/') Contact
         div.clearfix
 
-    // Public
-    script(type="text/ng-template" id="login")
-      include modules/login/partials/login
-    script(type="text/ng-template" id="signup")
-      include modules/signup/partials/signup
-    script(type="text/ng-template" id="404")
-      include modules/http/404
-    script(type="text/ng-template" id="home")
-      include modules/home/partials/index
-    script(type="text/ng-template" id="contact")
-      include modules/contact/partials/index
-    script(type="text/ng-template" id="about")
-      include modules/about/partials/index
-
-    // Admin
-    script(type="text/ng-template" id="admin/dashboard")
-      include modules/admin/partials/index
-
-    // Account
-    script(type="text/ng-template" id="account/dashboard")
-      include modules/account/partials/index
-
     script(src='/assets/bundle.js')
