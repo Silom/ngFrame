@@ -15,7 +15,7 @@ gulp.plugins = {
   concat: require('gulp-concat'),
   clean: require('gulp-clean'),
   less: require('gulp-less'),
-  sequence: require('run-sequence')
+  jadeify: require('jadeify')
 }
 
 // Sources
@@ -63,5 +63,5 @@ require('./gulp/browserify')(gulp, sources, destinations)
 // Main trigger
 gulp.task('default', ['app:build'])
 gulp.task('app:build', ['clean'], function () {
-  gulp.plugins.sequence(['assets:watch', 'browserify', 'less:watch', 'jade:watch'])
+  gulp.run(['assets:watch', 'browserify', 'less:watch', 'jade:watch'])
 })

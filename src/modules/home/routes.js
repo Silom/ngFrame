@@ -4,6 +4,6 @@ module.exports = function ($stateProvider, access) {
   $stateProvider
   .state('public.home', {
     url: '/',
-    templateUrl: 'home'
+    template: require('./partials/index.jade')
   })
 }

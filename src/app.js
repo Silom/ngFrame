@@ -13,12 +13,15 @@ var appDependencies = [
   require('./components/auth').name
 ]
 
-// Load all feature into this array
+// Load all modules into this array, if they have some kind of code base.
 var customModules = [
   require('./modules/home'),
   require('./modules/about'),
   require('./modules/admin'),
   require('./modules/account'),
+  require('./modules/login'),
+  require('./modules/signup'),
+  require('./modules/http'),
   require('./modules/contact')
 ]
 
@@ -69,22 +72,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
         access: access.admin
       }
     })
-    .state('public.404', {
-      url: '/404/',
-      templateUrl: '404'
-    })
-    
-    .state('anon.login', {
-      url: '/login/',
-      templateUrl: 'login',
-      controller: 'LoginCtrl'
-    })
-    .state('anon.signup', {
-      url: '/signup/',
-      templateUrl: 'signup',
-      controller: 'RegisterCtrl'
-    })
-
 
   // Since I want modules you can find all routes in the module itself
   customModules.forEach(function(model) {
@@ -121,8 +108,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
   $httpProvider.interceptors.push(function($q, $location) {
     return {
       'responseError': function(response) {
-        if(response.status === 401 || response.status === 403)
+        if(response.status === 401 || response.status === 403) {
           $location.path('/login')
+          //TODO Wipe session/storage as well
+        }
         return $q.reject(response)
       }
     }

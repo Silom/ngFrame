@@ -4,6 +4,6 @@ module.exports = function ($stateProvider, access) {
   $stateProvider
   .state('admin.dashboard', {
     url: '',
-    templateUrl: 'admin/dashboard'
+    template: require('./partials/index.jade')
   })
 }
