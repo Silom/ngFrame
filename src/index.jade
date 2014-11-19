@@ -8,9 +8,18 @@ html(lang='en' ng-app='FrameApp')
     div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavCtrl')
       div.container
         div.navbar-header
-          a.navbar-brand(href='/')
-            img.navbar-logo(src='/assets/media/logo-symbol-64x64.png')
-            span.navbar-brand-label {{appVars.projectName}}
+          div(access-level='accessLevels.anon')
+            a.navbar-brand(href='/')
+              img.navbar-logo(src='/assets/media/logo-symbol-64x64.png')
+              span.navbar-brand-label {{appVars.projectName}}
+          div(access-level='accessLevels.user')
+            a.navbar-brand(href='/account/')
+              img.navbar-logo(src='/assets/media/logo-symbol-64x64.png')
+              span.navbar-brand-label {{appVars.projectName}}
+          div(access-level='accessLevels.admin')
+            a.navbar-brand(href='/admin/')
+              img.navbar-logo(src='/assets/media/logo-symbol-64x64.png')
+              span.navbar-brand-label {{appVars.projectName}}
           button.navbar-toggle.collapsed(ng-click="isCollapsed = !isCollapsed")
             span.icon-bar
             span.icon-bar
