@@ -19,7 +19,8 @@ module.exports = function($rootScope, $scope, $state, $window, Auth) {
       })
   }
 
-  $scope.loginOauth = function(provider) {
-    $window.location.href = '/auth/' + provider
-  }
+  // Not supported by Frame right now
+  // $scope.loginOauth = function(provider) {
+  //   $window.location.href = '/auth/' + provider
+  // }
 }

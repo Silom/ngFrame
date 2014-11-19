@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+module.exports = function($rootScope, $scope, $location, Auth) {
   $scope.role = Auth.userRoles.user
   $scope.userRoles = Auth.userRoles
 
@@ -18,4 +18,4 @@ module.exports = ['$rootScope', '$scope', '$location', 'Auth', function($rootSco
         $rootScope.error = err
       })
   }
-}]
+}
