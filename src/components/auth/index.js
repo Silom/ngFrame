@@ -1,16 +1,10 @@
 'use strict';
 
-var localStorage = require('./service/localStorage')
-var authModule = angular.module('client-side-auth', [localStorage.name])
+var authModule = angular.module('client-side-auth', [
+  require('./service/local-storage').name
+])
 
-authModule.controller('NavCtrl', require('./controller/nav'))
-authModule.controller('LoginCtrl', require('./controller/login'))
-authModule.controller('RegisterCtrl', require('./controller/register'))
-authModule.controller('AdminCtrl', require('./controller/admin'))
-
-authModule.directive('accessLevel', require('./directives').accessLevel)
-authModule.directive('activeNav', require('./directives').activeNav)
-
-authModule.factory('Auth', require('./service/authFactory'))
+authModule.directive('accessLevel', require('./directive/access-level'))
+authModule.factory('Auth', require('./service/auth-factory'))
 
 module.exports = authModule

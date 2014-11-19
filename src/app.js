@@ -2,7 +2,6 @@
 
 // Get all the Angulars
 var angular = require('angular-bsfy')
-
 require('angular-bootstrap')
 
 // Load all the Angulars
@@ -10,7 +9,8 @@ var appDependencies = [
   'ui.bootstrap',
   require('angular-ui-router'),
   require('angular-bsfy/cookies').name,
-  require('./components/auth').name
+  require('./components/auth').name,
+  require('./behaviours/active-navigation').name
 ]
 
 // Load all modules into this array, if they have some kind of code base.
@@ -34,8 +34,9 @@ customModules.forEach(function(model) {
 var app = angular.module('FrameApp', appDependencies)
 
 // Globals
-app.controller('AppInformations', require('./config.js').varCtrl)
-
+app.controller('AppInformations', function ($scope) {
+  $scope.appVars = require('./config.js').appVars
+})
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
   var access = require('./components/auth/routingConfig.js').accessLevels
@@ -140,4 +141,19 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
       }
     }
   })
+})
+
+// TODO have to put this guy somewhere
+app.controller('NavCtrl', function($rootScope, $scope, $location, Auth) {
+  $scope.user = Auth.user
+  $scope.userRoles = Auth.userRoles
+  $scope.accessLevels = Auth.accessLevels
+
+  $scope.logout = function() {
+    Auth.logout(function() {
+      $location.path('/login')
+    }, function() {
+      $location.path('/login')// do nothing, local stuff is gone anyway
+    })
+  }
 })

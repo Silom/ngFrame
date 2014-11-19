@@ -1,17 +1,4 @@
-var config = {
-  roles :[
-    'public',
-    'user',
-    'admin'
-  ],
-
-  accessLevels : {
-    'public' : "*",
-    'anon': ['public'],
-    'user' : ['user'],
-    'admin': ['admin']
-  }
-}
+var config = require('../../config.js').authConfig
 
 function buildRoles(roles) {
   var bitMask = "01"
