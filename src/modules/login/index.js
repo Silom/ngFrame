@@ -2,6 +2,8 @@
 
 var pageModule = angular.module('loginPageModule', [])
 
+pageModule.controller('LoginCtrl', require('./controller/login'))
+
 pageModule.routings = function ($stateProvider, access) {
   $stateProvider
   .state('anon.login', {

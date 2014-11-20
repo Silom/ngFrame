@@ -2,6 +2,8 @@
 
 var pageModule = angular.module('signupPageModule', [])
 
+pageModule.controller('RegisterCtrl', require('./controller/register'))
+
 pageModule.routings = function ($stateProvider, access) {
   $stateProvider
   .state('anon.signup', {
