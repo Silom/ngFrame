@@ -10,7 +10,8 @@ var appDependencies = [
   require('angular-ui-router'),
   require('angular-bsfy/cookies').name,
   require('./components/auth').name,
-  require('./behaviours/active-navigation').name
+  require('./behaviours/active-navigation').name,
+  require('./components/equals').name
 ]
 
 // Load all modules into this array, if they have some kind of code base.
