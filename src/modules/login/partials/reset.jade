@@ -4,11 +4,17 @@ div.row
       h1 Reset Your Password
     form(ng-submit='reset()' name='resetForm' novalidate)
       div.form-group
+        label.control-label Email:
+        input.form-control(type='text' ng-model='email' name='email' required)
+      div.form-group
+        label.control-label Key from the mail:
+        input.form-control(type='text' ng-model='key' name='key' required)
+      div.form-group
         label.control-label New Password:
-        input.form-control(type='password' ng-model='password' name='password' required)
+        input.form-control(type='password' ng-model='password' equals="{{confirm}}" name='password' required)
       div.form-group
         label.control-label Confirm Password:
-        input.form-control(type='password' ng-model='confirm' name='confirm' required)
+        input.form-control(type='password' ng-model='confirm' equals="{{password}}" name='confirm' required)
       div.form-actions
         button.btn.btn-primary(type='submit' ng-disabled='resetForm.$invalid') Set Password
         |&nbsp;
