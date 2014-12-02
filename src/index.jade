@@ -47,8 +47,6 @@ html(lang='en' ng-app='FrameApp')
             ul.nav.navbar-nav
               li(active-nav)
                 a(href='/account/') My Account
-              li(active-nav)
-                a(href='/account/settings/') Settings
             ul.nav.navbar-nav.navbar-right
               li: a(href="/account/") {{ user.username }}
               li: a(href="" ng-click="logout()") Logout
@@ -91,7 +89,7 @@ html(lang='en' ng-app='FrameApp')
     div.footer
       div.container
         span.copyright.pull-right
-          |&#169; {{appVars.copyrightYear}} {{appVars.companyName}}
+            |&#169; {{appVars.copyrightYear}} {{appVars.companyName}}
         ul.links
           li: a(href='/') Home
           li: a(href='/contact/') Contact

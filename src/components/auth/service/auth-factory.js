@@ -3,7 +3,7 @@ module.exports = function(localStorageService, $http) {
 
   var accessLevels = require('../routingConfig.js').accessLevels,
       userRoles = require('../routingConfig.js').userRoles,
-      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public, key: null }
+      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public, key: null, id: null }
 
   if (currentUser.key)
     setAuthHeader(currentUser)
@@ -19,6 +19,9 @@ module.exports = function(localStorageService, $http) {
   }
 
   return {
+    getUser: function () {
+      return currentUser
+    },
     authorize: function(accessLevel, role) {
       if (role === undefined)
         role = currentUser.role
@@ -35,7 +38,8 @@ module.exports = function(localStorageService, $http) {
         var metaUser = {
           username: '',
           role: {},
-          key: ''
+          key: null,
+          id: null
         }
 
         // I assume there is only one user role, but I have to check on that one TODO
@@ -58,6 +62,7 @@ module.exports = function(localStorageService, $http) {
           return userRoles.user
         }
 
+        metaUser.id = user.user._id
         metaUser.key = user.session.key
         metaUser.role = getRole(user.user)
         metaUser.username = user.user.username
