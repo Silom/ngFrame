@@ -15,7 +15,7 @@ module.exports = function($rootScope, $scope, $location, Auth) {
         $location.path('/login')
       },
       function(err) {
-        $rootScope.error = err
+        $scope.error = err.message
       })
   }
 }

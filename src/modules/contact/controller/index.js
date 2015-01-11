@@ -11,7 +11,7 @@ module.exports = function($rootScope, $scope, $location, ContactService) {
         $location.path('/');
       },
       function(err) {
-        $rootScope.error = err
+        $sope.error = err.message
       })
   }
 }

@@ -2,5 +2,12 @@
 
 var pageModule = angular.module('mainPageModule', [])
 
-pageModule.routings = require('./routes.js')
+pageModule.routings = function ($stateProvider, access) {
+  $stateProvider
+  .state('public.home', {
+    url: '/',
+    template: require('./partials/index.jade')
+  })
+}
+
 module.exports = pageModule
