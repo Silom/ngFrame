@@ -3,6 +3,7 @@ div.row
     div.page-header
       h1 Forgot Your Password?
     form(ng-submit='forgot()' name='forgotForm' novalidate)
+      alert(type="danger" ng-show="error" close="error = null") {{error}}
       div.form-group
         label.control-label Enter Your Email:
         input.form-control(type='text' ng-model='email' name='email' required)

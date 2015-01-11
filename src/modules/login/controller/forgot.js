@@ -9,7 +9,7 @@ module.exports = function($rootScope, $scope, $state, LoginService) {
         $state.go('anon.login-reset')
       },
       function(err) {
-        $rootScope.error = "Failed to send request"
+        $scope.error = err.message
       })
   }
 }

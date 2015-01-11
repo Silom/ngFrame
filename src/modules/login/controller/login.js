@@ -15,7 +15,7 @@ module.exports = function($rootScope, $scope, $state, $window, Auth) {
           $state.go('public.home')
       },
       function(err) {
-        $rootScope.error = "Failed to login"
+        $scope.error = err.message
       })
   }
 

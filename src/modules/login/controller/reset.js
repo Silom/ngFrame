@@ -11,7 +11,7 @@ module.exports = function($rootScope, $scope, $state, $window, LoginService) {
         $state.go('anon.login')
       },
       function(err) {
-        $rootScope.error = "Something went wrong"
+        $scope.error = err.message
       })
   }
 }
