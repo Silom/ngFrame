@@ -19,6 +19,11 @@ module.exports = function(localStorageService, $http) {
   }
 
   return {
+    isLoggedIn: function() {
+      if (currentUser.username || currentUser.key || currentUser.id)
+        return true
+      return false
+    },
     getUser: function () {
       return currentUser
     },
