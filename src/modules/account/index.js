@@ -2,6 +2,7 @@
 
 var pageModule = angular.module('accountPageModule', [])
 
+pageModule.controller('SettingsController', require('./controller/settings.js'))
 pageModule.factory('AccountService', require('./service/account-factory'))
 
 pageModule.routings = function ($stateProvider, access) {
@@ -14,16 +15,7 @@ pageModule.routings = function ($stateProvider, access) {
   .state('account.settings', {
     url: 'settings/',
     template: require('./partials/settings.jade'),
-    controller: function ($scope, AccountService) {
-      
-      AccountService.getAccount(function (user) {
-        console.log(user)
-        $scope.contactInformation = user
-      },
-      function (err) {
-        console.log(err)
-      })
-    }
+    controller: 'SettingsController'
   })
 }
 

@@ -4,11 +4,14 @@ div.row
       h1 Account Settings
 div.row
   div.col-sm-9
+    alert(type="danger" ng-show="error" close="error = null") {{error}}
+    
     div.details
-      form(ng-submit='contactInformation()' name='contactInformationForm' novalidate)
+      form(ng-submit='contactInformationSubmit()' name='contactInformationForm' novalidate)
         fieldset
           legend Contact Info
           alert(type="danger" ng-show="contactInformation.error" close="contactInformation.error = null") {{contactInformation.error}}
+          alert(type="success" ng-show="contactInformation.success" close="contactInformation.success = null") We updated your contact informations.
           div.form-group
             label First Name:
             input.form-control(type='text' ng-model='contactInformation.first' name='first' value='{{contactInformation.first}}' required)
