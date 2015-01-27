@@ -10,7 +10,6 @@ module.exports = function($scope, AccountService) {
     $scope.error = err.message
   })
 
-  // Form Controller for name
   $scope.contactInformationSubmit = function() {
     var formInput = $scope.contactInformation
 
