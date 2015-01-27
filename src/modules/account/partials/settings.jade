@@ -1,0 +1,48 @@
+div.row
+  div.col-xs-12
+    div.page-header
+      h1 Account Settings
+div.row
+  div.col-sm-9
+    div.details
+      form(ng-submit='contactInformation()' name='contactInformationForm' novalidate)
+        fieldset
+          legend Contact Info
+          alert(type="danger" ng-show="contactInformation.error" close="contactInformation.error = null") {{contactInformation.error}}
+          div.form-group
+            label First Name:
+            input.form-control(type='text' ng-model='contactInformation.first' name='first' value='{{contactInformation.first}}' required)
+          div.form-group
+            label Middle Name:
+            input.form-control(type='text' ng-model='contactInformation.middle' name='middle' value='{{contactInformation.middle}}')
+          div.form-group
+            label Last Name:
+            input.form-control(type='text' ng-model='contactInformation.last' name='last' value='{{contactInformation.last}}' required)
+          div.form-group
+            button.btn.btn-primary.btn-update(type='submit' ng-disabled='contactInformationForm.$invalid') Update
+
+    div.identity
+      fieldset
+        legend Identity
+        alert(type="danger" ng-show="identity.error" close="identity.error = null") {{identity.error}}
+        div.form-group
+          label Username:
+          input.form-control(type='text' ng-model='identity.username' name='username' value='{{identity.username}}' required)
+        div.form-group
+          label Email:
+          input.form-control(type='text' ng-model='identity.email' name='email' value='{{identity.email}}' required)
+        div.form-group
+          button.btn.btn-primary.btn-update(type='button') Update
+
+    div.password
+      fieldset
+        legend Set Password
+        alert(type="danger" ng-show="password.error" close="password.error = null") {{password.error}}
+        div.form-group
+          label New Password:
+          input.form-control(type='password' ng-model='password.newPassword' name='newPassword' value='{{password.newPassword}}' required)
+        div.form-group
+          label Confirm Password:
+          input.form-control(type='password' ng-model='password.confirm' name='confirm' value='{{password.confirm}}' required)
+        div.form-group
+          button.btn.btn-primary.btn-password(type='button') Set Password
