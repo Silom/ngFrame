@@ -125,18 +125,21 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
 
     if(!('data' in toState) || !('access' in toState.data)) {
-      $rootScope.error = "Access undefined for this state"
+      // Access undefined for this state
       event.preventDefault()
     }
     else if (!Auth.authorize(toState.data.access)) {
-      $rootScope.error = "Seems like you tried accessing a route you don't have access to..."
+      // Accessing a route you don't have access to
       event.preventDefault()
 
       if(fromState.url === '^') {
         if(Auth.isLoggedIn()) {
-          $state.go('user.home')
+          if (Auth.getUser().role.title === 'admin') {
+            $state.go('admin.dashboard')
+          } else if (Auth.getUser().role.title === 'user') {
+            $state.go('account.dashboard')
+          }
         } else {
-          $rootScope.error = null
           $state.go('anon.login')
         }
       }
