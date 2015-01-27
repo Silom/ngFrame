@@ -19,14 +19,10 @@ html(lang='en' ng-app='FrameApp')
               span.icon-bar
           div.navbar-collapse.my-navbar-collapse.collapse(collapse="!isCollapsed")
             ul.nav.navbar-nav
-              li(active-nav)
-                a(href='/') Home
-              li(active-nav)
-                a(href='/about/') About
-              li(active-nav)
-                a(href='/signup/') Sign Up
-              li(active-nav)
-                a(href='/contact/') Contact
+              li(active-nav): a(href='/') Home
+              li(active-nav): a(href='/about/') About
+              li(active-nav): a(href='/signup/') Sign Up
+              li(active-nav): a(href='/contact/') Contact
             ul.nav.navbar-nav.navbar-right
               li(active-nav)
                 a(href='/login/')
@@ -45,8 +41,8 @@ html(lang='en' ng-app='FrameApp')
               span.icon-bar
           div.navbar-collapse.my-navbar-collapse.collapse(collapse="!isCollapsed")
             ul.nav.navbar-nav
-              li(active-nav)
-                a(href='/account/') My Account
+              li(active-nav): a(href='/account/') My Account
+              li(active-nav): a(href='/account/settings/') Settings
             ul.nav.navbar-nav.navbar-right
               li: a(href="/account/") {{ user.username }}
               li: a(href="" ng-click="logout()") Logout

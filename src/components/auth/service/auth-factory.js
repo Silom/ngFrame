@@ -3,9 +3,8 @@ module.exports = function(localStorageService, $http) {
 
   var accessLevels = require('../routingConfig.js').accessLevels,
       userRoles = require('../routingConfig.js').userRoles,
-      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public, roles: {public: userRoles.public}, key: null, id: null, isStored: false}
-
-  console.log(currentUser)
+      basicUserObject = { username: '', role: userRoles.public, key: null, id: null },
+      currentUser = localStorageService.get('userStorage') || basicUserObject
 
   if (currentUser.key)
     setAuthHeader(currentUser)
@@ -16,8 +15,11 @@ module.exports = function(localStorageService, $http) {
 
   function changeUser(user) {
     angular.extend(currentUser, user)
-    localStorageService.set('userStorage', user)
     setAuthHeader(user)
+  }
+
+  function saveUser(user) {
+    localStorageService.set('userStorage', user)
   }
 
   return {
@@ -58,7 +60,7 @@ module.exports = function(localStorageService, $http) {
                 case 'admin':
                   return userRoles.admin
                   break
-                case 'user':
+                case 'account':
                   return userRoles.user
                   break
                 default:
@@ -73,10 +75,10 @@ module.exports = function(localStorageService, $http) {
         metaUser.id = user.user._id
         metaUser.key = user.session.key
         metaUser.role = getRole(user.user)
-        metaUser.roles = {public: metaUser.role}
         metaUser.username = user.user.username
 
         changeUser(metaUser)
+        saveUser(metaUser)
         success(metaUser)
       }).error(error)
     },
@@ -87,10 +89,7 @@ module.exports = function(localStorageService, $http) {
 
       // Empty even on failure, so the user is not confused. On a 'relogin' the server will provide the same key again.
       localStorageService.remove('userStorage')
-      changeUser({
-        username: '',
-        role: userRoles.public
-      })
+      changeUser(basicUserObject)
     },
     accessLevels: accessLevels,
     userRoles: userRoles,
