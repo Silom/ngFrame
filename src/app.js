@@ -122,8 +122,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
 })
 
 .run(function ($rootScope, $state, Auth) {
-  console.log()
-
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
 
     if(!('data' in toState) || !('access' in toState.data)) {
