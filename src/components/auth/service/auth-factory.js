@@ -3,7 +3,9 @@ module.exports = function(localStorageService, $http) {
 
   var accessLevels = require('../routingConfig.js').accessLevels,
       userRoles = require('../routingConfig.js').userRoles,
-      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public, key: null, id: null }
+      currentUser = localStorageService.get('userStorage') || { username: '', role: userRoles.public, roles: {public: userRoles.public}, key: null, id: null, isStored: false}
+
+  console.log(currentUser)
 
   if (currentUser.key)
     setAuthHeader(currentUser)
@@ -41,6 +43,7 @@ module.exports = function(localStorageService, $http) {
     login: function(user, success, error) {
       $http.post('/api/login', user).success(function(user) {
         var metaUser = {
+          isStored: true,
           username: '',
           role: {},
           key: null,
@@ -70,6 +73,7 @@ module.exports = function(localStorageService, $http) {
         metaUser.id = user.user._id
         metaUser.key = user.session.key
         metaUser.role = getRole(user.user)
+        metaUser.roles = {public: metaUser.role}
         metaUser.username = user.user.username
 
         changeUser(metaUser)
