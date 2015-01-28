@@ -9,7 +9,6 @@ var plugins = {
   watch: require('gulp-watch'),
   plumber: require('gulp-plumber'),
   less: require('gulp-less'),
-  jade: require('gulp-jade'),
 
   browserify: require('browserify'),
   exorcist: require('exorcist'),
