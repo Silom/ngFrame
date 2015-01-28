@@ -1,67 +1,76 @@
 'use strict';
 
-var gulp = require('gulp'),
-    sources = {},
-    destinations = {}
+var gulp = require('gulp')
 
-gulp.plugins = {
-  plumber: require('gulp-plumber'),
-  watch: require('gulp-watch'),
-  vinylSource: require('vinyl-source-stream'),
-  vinylTransform: require('vinyl-transform'),
-  watchify: require('watchify'),
-  exorcist: require('exorcist'),
-  browserify: require('browserify'),
+var plugins = {
+  gutil: require('gulp-util'),
   concat: require('gulp-concat'),
-  clean: require('gulp-clean'),
+  autoprefixer: require('gulp-autoprefixer'),
+  watch: require('gulp-watch'),
+  plumber: require('gulp-plumber'),
   less: require('gulp-less'),
-  jadeify: require('jadeify')
+  jade: require('gulp-jade'),
+
+  browserify: require('browserify'),
+  exorcist: require('exorcist'),
+  watchify: require('watchify'),
+  jadeify: require('jadeify'),
+  rm: require('rimraf'),
+  source: require('vinyl-source-stream'),
+  transform: require('vinyl-transform')
+}
+
+gulp.configs = {
+  isProduction: plugins.gutil.env.dev ? false : true,
+  sourceMap: plugins.gutil.env.dev ? true : false
 }
 
 // Sources
+var sources = {}
 sources.less = "src/**/*.less"
 sources.docs = "src/**/*.jade"
 sources.js = "src/**/*.js"
 
 sources.root = {};
 sources.root.docs = "src/index.jade"
+sources.root.js = "./src/app.js"
 
 sources.styles = {}
 sources.styles.build = 'src/styles/bootstrap-build.less'
 sources.styles.root = 'src/styles/'
-
-sources.components = {}
-sources.components.js = "src/components/**/*.js"
-sources.components.docs = "src/components/**/*.jade"
-sources.components.less = "src/components/**/*.less"
-
-sources.modules = {}
-sources.modules.js = "src/modules/**/*.js"
-sources.modules.docs = "src/modules/**/*.jade"
-sources.modules.less = "src/modules/**/*.less"
 
 sources.assets = {}
 sources.assets.fonts = ['src/assets/fonts/*', 'node_modules/font-awesome/fonts/**']
 sources.assets.images = 'src/media/**/*'
 
 // Destinations
+var destinations = {}
 destinations.root = 'dist/'
-destinations.components = 'dist/components/'
-destinations.styles = 'dist/styles/'
+
+destinations.docs = destinations.root
+destinations.js = destinations.root
+destinations.styles = destinations.root + 'styles/'
 
 destinations.assets = {}
-destinations.assets.fonts = 'dist/fonts/'
-destinations.assets.images = 'dist/media/'
+destinations.assets.fonts = destinations.root + 'fonts/'
+destinations.assets.images = destinations.root + 'media/'
 
 // build and watch tasks, the file name is self explaining
-require('./gulp/utils').clean(gulp, destinations.root)
-require('./gulp/less')(gulp, sources, destinations)
-require('./gulp/jade')(gulp, sources, destinations)
-require('./gulp/assets')(gulp, sources, destinations)
-require('./gulp/browserify')(gulp, sources, destinations)
+require('./gulp/utils')(gulp, plugins, sources, destinations)
+require('./gulp/less')(gulp, plugins, sources, destinations)
+require('./gulp/jade')(gulp, plugins, sources, destinations)
+require('./gulp/assets')(gulp, plugins, sources, destinations)
+require('./gulp/browserify')(gulp, plugins, sources, destinations)
 
-// Main trigger
-gulp.task('default', ['app:build'])
-gulp.task('app:build', ['clean'], function () {
-  gulp.run(['assets:watch', 'browserify', 'less:watch', 'jade:watch'])
+// Main trigger with dev switch
+gulp.task('default', ['clean'], function () {
+  gulp.configs.isProduction ? gulp.start('app:build') : gulp.start('app:dev')
+})
+
+gulp.task('app:build', function () {
+  gulp.start(['jade:build', 'browserify:build', 'less:build', 'assets:build'])
+})
+
+gulp.task('app:dev', function () {
+  gulp.start(['jade:watch', 'browserify:watch', 'less:watch', 'assets:watch'])
 })

@@ -1,8 +1,7 @@
 'use strict';
 
-exports.clean = function (gulp, sources) {
-  gulp.task('clean', function() {
-    return gulp.src(sources)
-      .pipe(gulp.plugins.clean({force: true}))
+module.exports = function (gulp, plugins, sources, destinations) {
+  gulp.task('clean', function(callback) {
+    plugins.rm(destinations.root, callback)
   })
 }

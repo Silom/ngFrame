@@ -1,15 +1,17 @@
 'use strict';
 
-module.exports = function (gulp, sources, destinations) {
+module.exports = function (gulp, plugins, sources, destinations) {
   gulp.task('less:build', function() {
     return gulp.src(sources.styles.build)
-      .pipe(gulp.plugins.plumber())
-      .pipe(gulp.plugins.less())
-      .pipe(gulp.plugins.concat('core.css'))
+      .pipe(plugins.plumber())
+      .pipe(plugins.less())
+      .pipe(plugins.concat('core.css'))
       .pipe(gulp.dest(destinations.styles))
   })
 
-  gulp.task('less:watch', function() {
-    gulp.plugins.watch({glob: sources.less}, ['less:build'])
+  gulp.task('less:watch', ['less:build'], function() {
+    plugins.watch(sources.less, function () {
+      gulp.start('less:build')
+    })
   })
 }
