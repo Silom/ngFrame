@@ -16,12 +16,15 @@ After installing Frame, install Gulp and all node packages:
 
 ``
 npm install gulp -g
+
 npm install
 ``
 
-Run Project with ``gulp`` or ``npm start``.
+Run Project with ``gulp --dev`` or ``npm start``.
 
 Start customizing.
+
+Build the Project using ``gulp`` (This is ``gulp --dev``  without starting watcher and adding debugging tools like .map files etc.).
 
 ## Technology
 
