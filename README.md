@@ -14,11 +14,10 @@ I had to make changes to get the views and assets right.
 
 After installing Frame, install Gulp and all node packages:
 
-``
+```
 npm install gulp -g
-
 npm install
-``
+```
 
 Run Project with ``gulp --dev`` or ``npm start``.
 
