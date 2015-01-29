@@ -1,5 +1,6 @@
 # ngFrame
 
+[![Build Status](https://travis-ci.org/silom/ngframe.svg?branch=master)](https://travis-ci.org/silom/ngframe)
 [![dependencies](https://david-dm.org/silom/ngframe.png)](https://david-dm.org/silom/ngframe)
 
 ngFrame is a front end for [Frame](git@github.com:jedireza/frame.git). The main idea is to rewrite the [Drywall](https://github.com/jedireza/drywall) Front end in Angular.js, this is not completely possible since Frame works quite different to the Drywall backend.
