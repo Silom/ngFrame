@@ -5,9 +5,9 @@ div.row
         alert(type='danger' ng-show='newStatus.error' close='newStatus.error = null') {{newStatus.error}} 
         form.form-inline.pull-right(ng-submit='newStatusSubmit(newStatus)' name='newStatusForm' novalidate)
           div.input-group
-            input.form-control(name='pivot' type='text' placeholder='pivot' ng-model='newStatus.pivot' value='{{newStatus.pivot}}' required)
+            input.form-control(name='pivot' type='text' placeholder='pivot' ng-model='newStatus.pivot' required)
           div.input-group
-            input.form-control(name='name' type='text' placeholder='name' ng-model='newStatus.name' value='{{newStatus.name}}' required)
+            input.form-control(name='name' type='text' placeholder='name' ng-model='newStatus.name' required)
           div.input-group
             button.btn.btn-primary.btn-add(type='submit' ng-disabled='newStatusForm.$invalid') Add New
         h1 Statuses
