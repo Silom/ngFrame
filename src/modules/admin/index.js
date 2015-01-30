@@ -26,19 +26,6 @@ pageModule.routings = function ($stateProvider, access) {
     controller: require('./controller/status-detail.js')
   })
 
-  // Categories Areas
-  // $stateProvider
-  // .state('admin.categorylist', {
-  //   url: 'categories/',
-  //   template: require('./partials/categories/index.jade'),
-  //   controller: require('./controller/category.js')
-  // })
-  // .state('admin.categorydetail', {
-  //   url: 'categories/:id/',
-  //   template: require('./partials/categories/detail.jade'),
-  //   controller: require('./controller/category-detail.js')
-  // })
-
   // User Areas
   $stateProvider
   .state('admin.userlist', {
