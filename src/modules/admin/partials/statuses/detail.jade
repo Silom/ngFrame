@@ -1,0 +1,32 @@
+div.row
+  div.col-xs-12
+    div#header
+      div.page-header
+        h1
+          a(href='/admin/statuses/') Statuses
+          |  / {{status.name}}
+    
+    alert(type='danger' ng-show='error' close='error = null') {{error}}
+    div#details
+      form(ng-submit='updateStatusSubmit(updateStatusData)' name='statusForm' novalidate)
+        fieldset
+          legend Details
+          alert(type='danger' ng-show='updateStatus.error' close='updateStatus.error = null') {{updateStatus.error}}
+          alert(type='success' ng-show='updateStatus.success' close='updateStatus.success = null') We updated the name of you Status
+          div.form-group
+            label Name:
+            input.form-control(type='text' ng-model='updateStatusData.name' name='name' required)
+          div.form-group
+            button.btn.btn-primary.btn-update(type='submit' ng-disabled='statusForm.$invalid') Update
+
+    div#delete
+      fieldset
+        legend Danger Zone
+        alert(type='danger' ng-show='deleteStatusError.error' close='deleteStatusError.error = null') {{deleteStatusError.error}}
+        div.form-group
+          span.help-block
+            span.label.label-danger If you do this it cannot be undone.
+            |&nbsp;
+            span.text-muted You may also create orphaned document relationships too.
+        div.form-group
+          button.btn.btn-danger.btn-delete(type='button' ng-click='deleteStatus()') Delete

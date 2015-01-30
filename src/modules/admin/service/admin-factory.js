@@ -3,6 +3,33 @@
 module.exports = function ($http) {
 
   return {
+    getStatuses: function (filter, success, error) {
+      $http.get('/api/statuses', filter).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    getStatus: function (id, success, error) {
+      $http.get('/api/statuses/' + id).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    addStatus: function (status, success, error) {
+      $http.post('/api/statuses', status).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    updateStatus: function (id, status, success, error) {
+      $http.put('/api/statuses/' + id, status).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    deleteStatus: function (id, success, error) {
+      $http.delete('/api/statuses/' + id).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+
+
     getAccounts: function (filter, success, error) {
       $http.get('/api/accounts', filter).success(function(res) {
         success(res)

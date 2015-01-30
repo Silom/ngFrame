@@ -3,7 +3,7 @@
 var pageModule = angular.module('adminPageModule', [])
 
 // pageModule.controller('AdminAccountController', require('./controller/account.js'))
-pageModule.factory('AdminAccountService', require('./service/account-factory'))
+pageModule.factory('AdminService', require('./service/admin-factory'))
 
 
 pageModule.routings = function ($stateProvider, access) {
@@ -12,6 +12,35 @@ pageModule.routings = function ($stateProvider, access) {
     url: '',
     template: require('./partials/index.jade')
   })
+
+  // Statuses Areas
+  $stateProvider
+  .state('admin.statuslist', {
+    url: 'statuses/',
+    template: require('./partials/statuses/index.jade'),
+    controller: require('./controller/status.js')
+  })
+  .state('admin.statusdetail', {
+    url: 'statuses/:id/',
+    template: require('./partials/statuses/detail.jade'),
+    controller: require('./controller/status-detail.js')
+  })
+
+  // Categories Areas
+  // $stateProvider
+  // .state('admin.categorylist', {
+  //   url: 'categories/',
+  //   template: require('./partials/categories/index.jade'),
+  //   controller: require('./controller/category.js')
+  // })
+  // .state('admin.categorydetail', {
+  //   url: 'categories/:id/',
+  //   template: require('./partials/categories/detail.jade'),
+  //   controller: require('./controller/category-detail.js')
+  // })
+
+  // User Areas
+  $stateProvider
   .state('admin.userlist', {
     url: 'users/',
     template: require('./partials/users/index.jade'),
@@ -22,10 +51,31 @@ pageModule.routings = function ($stateProvider, access) {
     template: require('./partials/users/detail.jade'),
     controller: require('./controller/user-detail.js')
   })
+
+  // Account Areas
+  // $stateProvider
   // .state('admin.accountlist', {
   //   url: 'accounts/',
   //   template: require('./partials/account/index.jade'),
-  //   controller: 'AdminAccountController'
+  //   controller: require('./controller/account.js')
+  // })
+  // .state('admin.accountdetail', {
+  //   url: 'accounts/:id/',
+  //   template: require('./partials/account/detail.jade'),
+  //   controller: require('./controller/account-detail.js')
+  // })
+
+  // Admin Areas
+  // $stateProvider
+  // .state('admin.adminlist', {
+  //   url: 'admins/',
+  //   template: require('./partials/admins/index.jade'),
+  //   controller: require('./controller/admin.js')
+  // })
+  // .state('admin.admindetail', {
+  //   url: 'admins/:id/',
+  //   template: require('./partials/admins/detail.jade'),
+  //   controller: require('./controller/admin-detail.js')
   // })
 }
 

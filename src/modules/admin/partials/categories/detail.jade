@@ -1,0 +1,34 @@
+div.row
+  div.col-xs-12
+    div#header
+      div.page-header
+        h1
+          a(href='/admin/categories/') Categories
+          |  / <%- name %>
+          
+    div#details
+      fieldset
+        legend Details
+        // Alert
+        div.form-group(class!='<%- errfor.pivot ? "has-error" : "" %>')
+          label Pivot:
+          input.form-control(type='text', name='pivot', value!='<%- pivot %>')
+          span.help-block <%- errfor.pivot %>
+        div.form-group(class!='<%- errfor.name ? "has-error" : "" %>')
+          label Name:
+          input.form-control(type='text', name='name', value!='<%- name %>')
+          span.help-block <%- errfor.name %>
+        div.form-group
+          button.btn.btn-primary.btn-update(type='button') Update
+          
+    div#delete
+      fieldset
+        legend Danger Zone
+        // Alert
+        div.form-group
+          span.help-block
+            span.label.label-danger If you do this, it cannot be undone.
+            |&nbsp;
+            span.text-muted You may also create orphaned document relationships too.
+        div.form-group
+          button.btn.btn-danger.btn-delete(type='button') Delete

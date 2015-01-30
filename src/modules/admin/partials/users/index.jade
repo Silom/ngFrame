@@ -60,9 +60,8 @@ div.row
               input.btn.btn-default.btn-sm.btn-details(type='button' value='Edit' ui-sref='admin.userdetail({ id: user._id })')
             td {{user.username}}
             td {{user.email}}
-            td {{user.isActive}}
-            td {{user._id}}
-          
+            td {{user.isActive ? "Yes" : "No"}}
+            td {{user._id}}          
           
           tr(ng-show='userList.length === 0')
             td(colspan='5') no documents matched

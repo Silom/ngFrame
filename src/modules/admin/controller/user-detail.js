@@ -1,8 +1,8 @@
-module.exports = function($scope, $stateParams, AdminAccountService) {
+module.exports = function($scope, $stateParams, AdminService) {
 
   var userId = $stateParams.id
 
-  AdminAccountService.getUser(userId, function (res) {
+  AdminService.getUser(userId, function (res) {
     $scope.identity = res
   }, function (err) {
     $scope.error = err.message
@@ -16,7 +16,7 @@ module.exports = function($scope, $stateParams, AdminAccountService) {
       email: data.email
     }
 
-    AdminAccountService.updateUser(userId, toSend, function (res) {
+    AdminService.updateUser(userId, toSend, function (res) {
       $scope.identity.success = true
     }, function (err) {
       $scope.identity.error = err.message
