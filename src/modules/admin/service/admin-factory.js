@@ -40,6 +40,21 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
+    addAccount: function (account, success, error) {
+      $http.post('/api/accounts', account).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    updateAccount: function (id, account, success, error) {
+      $http.put('/api/account/' + id, account).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    deleteAccount: function (id, success, error) {
+      $http.delete('/api/account/' + id).success(function(res) {
+        success(res)
+      }).error(error)
+    },
 
 
     getUsers: function (filter, success, error) {

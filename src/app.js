@@ -4,6 +4,8 @@
 var angular = require('angular-bsfy')
 require('angular-bootstrap')
 
+var momentjs = require('moment')
+
 // Load all the Angulars
 var appDependencies = [
   'ui.bootstrap',
@@ -160,4 +162,8 @@ app.controller('NavCtrl', function($rootScope, $scope, $location, Auth) {
       $location.path('/login')// do nothing, local stuff is gone anyway
     })
   }
+})
+
+app.service('momentjs', function () {
+  return momentjs
 })

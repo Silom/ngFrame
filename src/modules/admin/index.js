@@ -2,9 +2,7 @@
 
 var pageModule = angular.module('adminPageModule', [])
 
-// pageModule.controller('AdminAccountController', require('./controller/account.js'))
 pageModule.factory('AdminService', require('./service/admin-factory'))
-
 
 pageModule.routings = function ($stateProvider, access) {
   $stateProvider
@@ -18,12 +16,12 @@ pageModule.routings = function ($stateProvider, access) {
   .state('admin.statuslist', {
     url: 'statuses/',
     template: require('./partials/statuses/index.jade'),
-    controller: require('./controller/status.js')
+    controller: require('./controller/status/index.js')
   })
   .state('admin.statusdetail', {
     url: 'statuses/:id/',
     template: require('./partials/statuses/detail.jade'),
-    controller: require('./controller/status-detail.js')
+    controller: require('./controller/status/detail.js')
   })
 
   // User Areas
@@ -31,26 +29,26 @@ pageModule.routings = function ($stateProvider, access) {
   .state('admin.userlist', {
     url: 'users/',
     template: require('./partials/users/index.jade'),
-    controller: require('./controller/user.js')
+    controller: require('./controller/user/index.js')
   })
   .state('admin.userdetail', {
     url: 'users/:id/',
     template: require('./partials/users/detail.jade'),
-    controller: require('./controller/user-detail.js')
+    controller: require('./controller/user/detail.js')
   })
 
   // Account Areas
-  // $stateProvider
-  // .state('admin.accountlist', {
-  //   url: 'accounts/',
-  //   template: require('./partials/account/index.jade'),
-  //   controller: require('./controller/account.js')
-  // })
-  // .state('admin.accountdetail', {
-  //   url: 'accounts/:id/',
-  //   template: require('./partials/account/detail.jade'),
-  //   controller: require('./controller/account-detail.js')
-  // })
+  $stateProvider
+  .state('admin.accountlist', {
+    url: 'accounts/',
+    template: require('./partials/account/index.jade'),
+    controller: require('./controller/account/index.js')
+  })
+  .state('admin.accountdetail', {
+    url: 'accounts/:id/',
+    template: require('./partials/account/detail.jade'),
+    controller: require('./controller/account/detail.js')
+  })
 
   // Admin Areas
   // $stateProvider
