@@ -67,8 +67,18 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
+    addUser: function (user, success, error) {
+      $http.post('/api/User', user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
     updateUser: function (id, user, success, error) {
       $http.put('/api/users/' + id, user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    deleteUser: function (id, success, error) {
+      $http.delete('/api/users/' + id).success(function(res) {
         success(res)
       }).error(error)
     }

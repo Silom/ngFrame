@@ -1,4 +1,4 @@
-module.exports = function($scope, $stateParams, AdminService) {
+module.exports = function($scope, $state, $stateParams, AdminService) {
 
   var userId = $stateParams.id
 
@@ -15,7 +15,6 @@ module.exports = function($scope, $stateParams, AdminService) {
       username: data.username,
       email: data.email
     }
-
     AdminService.updateUser(userId, toSend, function (res) {
       $scope.identity.success = true
     }, function (err) {
@@ -23,4 +22,14 @@ module.exports = function($scope, $stateParams, AdminService) {
     })
   }
 
+
+  $scope.deleteUser = function () {
+    if (confirm('Are you sure?')) {
+      AdminService.deleteUser(userId, function (res) {
+        $state.go('admin.userlist')
+      }, function (err) {
+        $scope.deleteUserError = err.message
+      })
+    }
+  }
 }

@@ -70,15 +70,15 @@ div.row
     //-       input.form-control(type='password' name='confirm')
     //-     div.form-group
     //-       button.btn.btn-primary.btn-password(type='button') Set Password
-    //- 
-    //- div#delete
-    //-   fieldset
-    //-     legend Danger Zone
-    //-     // Alert
-    //-     div.form-group
-    //-       span.help-block
-    //-         span.label.label-danger If you do this it cannot be undone.
-    //-         |&nbsp;
-    //-         span.text-muted You may also create orphaned document relationships too.
-    //-     div.form-group
-    //-       button.btn.btn-danger.btn-delete(type='button') Delete
+
+    div#delete
+      fieldset
+        legend Danger Zone
+        alert(type='danger' ng-show='deleteUserError.error' close='deleteUserError.error = null') {{deleteUserError.error}}
+        div.form-group
+          span.help-block
+            span.label.label-danger If you do this it cannot be undone.
+            |&nbsp;
+            span.text-muted You may also create orphaned document relationships too.
+        div.form-group
+          button.btn.btn-danger.btn-delete(type='button' ng-click='deleteUser()') Delete
