@@ -17,12 +17,12 @@ div.row
           select.form-control(ng-model='identity.isActive' name='isActive' requiered ng-options='item as (item ? "Yes" : "No") for item in [true, false]')
         div.form-group
           label Username:
-          input.form-control(type='text' ng-model='identity.username' name='username' value='{{identity.username}}' requiered)
+          input.form-control(type='text' ng-model='identity.username' name='username' value='{{identity.username}}' required)
         div.form-group
           label Email:
-          input.form-control(type='text' ng-model='identity.email' name='email' value='{{identity.email}}' requiered)
+          input.form-control(type='text' ng-model='identity.email' name='email' value='{{identity.email}}' required)
         div.form-group
-          button.btn.btn-primary.btn-update(type='submit' ng-disabled='loginForm.$invalid') Update
+          button.btn.btn-primary.btn-update(type='submit' ng-disabled='identityForm.$invalid') Update
     
     //- div#roles
     //-   fieldset

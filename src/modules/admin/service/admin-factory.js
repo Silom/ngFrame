@@ -46,12 +46,12 @@ module.exports = function ($http) {
       }).error(error)
     },
     updateAccount: function (id, account, success, error) {
-      $http.put('/api/account/' + id, account).success(function(res) {
+      $http.put('/api/accounts/' + id, account).success(function(res) {
         success(res)
       }).error(error)
     },
     deleteAccount: function (id, success, error) {
-      $http.delete('/api/account/' + id).success(function(res) {
+      $http.delete('/api/accounts/' + id).success(function(res) {
         success(res)
       }).error(error)
     },
