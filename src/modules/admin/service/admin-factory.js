@@ -68,7 +68,7 @@ module.exports = function ($http) {
       }).error(error)
     },
     addUser: function (user, success, error) {
-      $http.post('/api/User', user).success(function(res) {
+      $http.post('/api/user', user).success(function(res) {
         success(res)
       }).error(error)
     },
@@ -79,6 +79,60 @@ module.exports = function ($http) {
     },
     deleteUser: function (id, success, error) {
       $http.delete('/api/users/' + id).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+
+
+    getAdmins: function (filter, success, error) {
+      $http.get('/api/admins', filter).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    getAdmin: function (id, success, error) {
+      $http.get('/api/admins/' + id).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    addAdmin: function (user, success, error) {
+      $http.post('/api/admins', user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    updateAdmin: function (id, user, success, error) {
+      $http.put('/api/admins/' + id, user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    deleteAdmin: function (id, success, error) {
+      $http.delete('/api/admins/' + id).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+
+
+    getAdminGroups: function (filter, success, error) {
+      $http.get('/api/admin-groups', filter).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    getAdminGroup: function (id, success, error) {
+      $http.get('/api/admin-groups/' + id).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    addAdminGroup: function (user, success, error) {
+      $http.post('/api/admin-groups', user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    updateAdminGroup: function (id, user, success, error) {
+      $http.put('/api/admin-groups/' + id, user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    deleteAdminGroup: function (id, success, error) {
+      $http.delete('/api/admin-groups/' + id).success(function(res) {
         success(res)
       }).error(error)
     }

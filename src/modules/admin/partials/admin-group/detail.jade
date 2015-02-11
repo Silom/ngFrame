@@ -1,0 +1,69 @@
+div.row
+  div.col-xs-12
+    div#header
+      div.page-header
+        h1
+          a(href='/admin/admin-groups/') Admin Groups
+          |  / {{group.name}}
+
+    alert(type='danger' ng-show='error' close='error = null') {{error}}
+    
+    form#details(ng-submit='details.submit({ name: group.name })' name='groupForm' novalidate)
+      fieldset
+        legend Details
+        alert(type='danger' ng-show='details.error' close='details.error = null') {{details.error}}
+        alert(type='success' ng-show='details.success' close='details.success = null') We updated your group informations.
+        div.form-group
+          label Name:
+          input.form-control(type='text' name='name' ng-model='group.name' required)
+        div.form-group
+          button.btn.btn-primary.btn-update(type='submit' ng-disabled='groupForm.$invalid') Update
+          
+    //- div#permissions
+    //-   fieldset
+    //-     legend Permissions
+    //-     // Alert
+    //-     div.form-group
+    //-       label New Setting:
+    //-       div.input-group
+    //-         input.form-control(name='newPermission' type='text' placeholder='enter a name')
+    //-         div.input-group-btn
+    //-           button.btn.btn-success.btn-add(type='button') Add
+    //-     div.form-group
+    //-       label Settings:
+    //-       div.permissions
+    //-         |<% _.each(permissions function(permission) { %>
+    //-         div.input-group
+    //-           input.form-control(disabled=true value!='<%= permission.name %>')
+    //-           div.input-group-btn
+    //-             |<% if (permission.permit) { %>
+    //-             button.btn.btn-default.btn-allow(type='button' disabled) Allow
+    //-             button.btn.btn-default.btn-deny(type='button') Deny
+    //-             |<% } else { %>
+    //-             button.btn.btn-default.btn-allow(type='button') Allow
+    //-             button.btn.btn-default.btn-deny(type='button' disabled) Deny
+    //-             |<% } %>
+    //-             button.btn.btn-danger.btn-delete(type='button')
+    //-               i.fa.fa-trash-o.fa-inverse
+    //-         |<% }); %>
+    //-         |<% if (permissions.length == 0) { %>
+    //-         span.badge
+    //-           | no permissions defined
+    //-         |<% } %>
+    //-         span.help-block <%- errfor.settings %>
+    //-     div.form-group
+    //-       button.btn.btn-primary.btn-set(type='button') Save Settings
+
+    div#delete
+      fieldset
+        legend Danger Zone
+        alert(type='danger' ng-show='deleteGroupError.error' close='deleteGroupError.error = null') {{deleteGroupError.error}}
+        div.form-group
+          span.help-block
+            span.label.label-danger If you do this it cannot be undone.
+            |&nbsp;
+            span.text-muted You may also create orphaned document relationships too.
+        div.form-group
+          button.btn.btn-danger.btn-delete(type='button' ng-click='deleteGroup()') Delete
+    
+      

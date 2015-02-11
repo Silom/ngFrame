@@ -15,12 +15,12 @@ pageModule.routings = function ($stateProvider, access) {
   $stateProvider
   .state('admin.statuslist', {
     url: 'statuses/',
-    template: require('./partials/statuses/index.jade'),
+    template: require('./partials/status/index.jade'),
     controller: require('./controller/status/index.js')
   })
   .state('admin.statusdetail', {
     url: 'statuses/:id/',
-    template: require('./partials/statuses/detail.jade'),
+    template: require('./partials/status/detail.jade'),
     controller: require('./controller/status/detail.js')
   })
 
@@ -28,12 +28,12 @@ pageModule.routings = function ($stateProvider, access) {
   $stateProvider
   .state('admin.userlist', {
     url: 'users/',
-    template: require('./partials/users/index.jade'),
+    template: require('./partials/user/index.jade'),
     controller: require('./controller/user/index.js')
   })
   .state('admin.userdetail', {
     url: 'users/:id/',
-    template: require('./partials/users/detail.jade'),
+    template: require('./partials/user/detail.jade'),
     controller: require('./controller/user/detail.js')
   })
 
@@ -51,17 +51,30 @@ pageModule.routings = function ($stateProvider, access) {
   })
 
   // Admin Areas
-  // $stateProvider
-  // .state('admin.adminlist', {
-  //   url: 'admins/',
-  //   template: require('./partials/admins/index.jade'),
-  //   controller: require('./controller/admin.js')
-  // })
-  // .state('admin.admindetail', {
-  //   url: 'admins/:id/',
-  //   template: require('./partials/admins/detail.jade'),
-  //   controller: require('./controller/admin-detail.js')
-  // })
+  $stateProvider
+  .state('admin.adminlist', {
+    url: 'administrators/',
+    template: require('./partials/admin/index.jade'),
+    controller: require('./controller/admin/index.js')
+  })
+  .state('admin.admindetail', {
+    url: 'administrators/:id/',
+    template: require('./partials/admin/detail.jade'),
+    controller: require('./controller/admin/detail.js')
+  })
+
+  // Admin Groups
+  $stateProvider
+  .state('admin.grouplist', {
+    url: 'admin-groups/',
+    template: require('./partials/admin-group/index.jade'),
+    controller: require('./controller/admin-group/index.js')
+  })
+  .state('admin.groupdetail', {
+    url: 'admin-groups/:id/',
+    template: require('./partials/admin-group/detail.jade'),
+    controller: require('./controller/admin-group/detail.js')
+  })
 }
 
 module.exports = pageModule
