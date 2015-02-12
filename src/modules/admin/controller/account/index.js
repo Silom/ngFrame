@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function ($scope, AdminService, momentjs) {
+module.exports = function ($scope, $state, AdminService, momentjs) {
 
   $scope.ago = function (time) {
     return momentjs(time).fromNow()
@@ -11,4 +11,14 @@ module.exports = function ($scope, AdminService, momentjs) {
   }, function (err) {
     $scope.error = err.message
   })
+
+  $scope.newAccount = {
+    submit: function (input) {
+      AdminService.addAccount(input, function (res) {
+        $state.go('admin.accountdetail', {id: res._id})
+      }, function (err) {
+        $scope.newAccount.error = err.message
+      })
+    }
+  }
 }

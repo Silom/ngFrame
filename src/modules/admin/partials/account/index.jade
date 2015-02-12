@@ -2,6 +2,10 @@ div.row
   div.col-xs-12
     div#header
       div.page-header
+        alert(type='danger' ng-show='newAccount.error' close='newAccount.error = null') {{newAccount.error}} 
+        form.form-inline.pull-right(ng-submit='newAccount.submit(newAccount.data)' name='newAccountForm' novalidate)
+          input.form-control(name='name' ng-model='newAccount.data.name' type='text' placeholder='enter a name' required)
+          button.btn.btn-primary.btn-add(type='submit' ng-disabled='newAccountForm.$invalid') Add New
         h1 Accounts
     
     alert(type='danger' ng-show='error' close='error = null') {{error}}
