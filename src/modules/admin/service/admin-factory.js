@@ -55,6 +55,16 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
+    accountLinkUser: function (id, user, success, error) {
+      $http.put('/api/accounts/'+ id +'/user', user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    accountUnlinkUser: function (id, success, error) {
+      $http.delete('/api/accounts/'+ id +'/user').success(function(res) {
+        success(res)
+      }).error(error)
+    },
 
 
     getUsers: function (filter, success, error) {

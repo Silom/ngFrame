@@ -26,25 +26,25 @@ div.row
         div.form-group
           button.btn.btn-primary.btn-update(type='submit' ng-disabled='identityForm.$invalid') Update
 
-
-    //- div#login
-    //-   fieldset
-    //-     legend Login
-    //-     // Alert
-    //-     div.form-group
-    //-       label Username:
-    //-       div.input-group
-    //-         |<% if (name) { %>
-    //-         input.form-control(disabled=true value='<%= name %>')
-    //-         div.input-group-btn
-    //-           button.btn.btn-warning.btn-user-unlink(type='button') Unlink
-    //-           button.btn.btn-default.btn-user-open(type='button') Open
-    //-         |<% } else { %>
-    //-         input.form-control(name='newUsername' type='text' placeholder='enter a username')
-    //-         div.input-group-btn
-    //-           button.btn.btn-success.btn-user-link(type='button') Link
-    //-         |<% } %>
-    //-       span.help-block <%- errfor.newUsername %>
+    div#link-user
+      fieldset
+        legend Login
+        alert(type='danger' ng-show='user.error' close='user.error = null') {{user.error}}
+        alert(type='success' ng-show='user.success' close='user.success = null') {{user.success}}
+        div(ng-show='identity.user')
+          label Username:
+          div.input-group
+            input.form-control(disabled=true ng-model='identity.user.name')
+            div.input-group-btn
+              button.btn.btn-warning.btn-user-unlink(type='button' ng-click='user.unlink()') Unlink
+              button.btn.btn-default.btn-user-open(type='button' ui-sref='admin.userdetail({ id: identity.user.id })') Open
+              
+        form(ng-hide='identity.user' ng-submit='user.link(user.data)' name='linkUserForm' novalidate)
+          label Username:
+          div.input-group
+            input.form-control(name='newUsername' ng-model='user.data' type='text' placeholder='enter a username' required)
+            span.input-group-btn
+              button.btn.btn-success.btn-user-link(type='submit' ng-disabled='linkUserForm.$invalid') Link
 
     div#delete
       fieldset
@@ -58,7 +58,7 @@ div.row
         div.form-group
           button.btn.btn-danger.btn-delete(type='button' ng-click='deleteAccount()') Delete
       
-  //- div.col-sm-4
+  div.col-sm-4
   //-   fieldset
   //-     div#status-new.status-new
   //-       legend Status

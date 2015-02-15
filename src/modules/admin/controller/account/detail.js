@@ -23,6 +23,25 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
     })
   }
 
+  $scope.user = {
+    unlink: function () {
+      AdminService.accountUnlinkUser(accountId, function (res) {
+        $scope.user.success = 'The link to the user was removed.'
+        $scope.identity.user = null
+      }, function (err) {
+        $scope.user.error = err.message
+      })
+    },
+    link: function (name) {
+      AdminService.accountLinkUser(accountId, {username: name}, function (res) {
+        $scope.user.success = 'User was added to the account.'
+        $scope.identity = res
+      }, function (err) {
+        $scope.user.error = err.message
+      })
+    },
+  }
+
   $scope.deleteAccount = function () {
     if (confirm('Are you sure?')) {
       AdminService.deleteAccount(accountId, function (res) {
