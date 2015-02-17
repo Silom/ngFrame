@@ -1,6 +1,10 @@
-module.exports = function($scope, $state, $stateParams, AdminService) {
+module.exports = function($scope, $state, $stateParams, AdminService, momentjs) {
 
   var accountId = $stateParams.id
+
+  $scope.ago = function (time) {
+    return momentjs(time).fromNow()
+  }
 
   AdminService.getAccount(accountId, function (res) {
     $scope.identity = res
@@ -40,6 +44,18 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
         $scope.user.error = err.message
       })
     },
+  }
+
+  // save to note.list
+  $scope.note = {
+    submit: function (input) {
+      AdminService.accountAddNote(accountId, {data: input}, function (res) {
+        $scope.identity = res
+        $scope.note.data = null
+      }, function (err) {
+        $scope.note.error = err.message
+      })
+    }
   }
 
   $scope.deleteAccount = function () {

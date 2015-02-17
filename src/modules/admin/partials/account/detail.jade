@@ -59,44 +59,42 @@ div.row
           button.btn.btn-danger.btn-delete(type='button' ng-click='deleteAccount()') Delete
       
   div.col-sm-4
-  //-   fieldset
-  //-     div#status-new.status-new
-  //-       legend Status
-  //-       // Alert
-  //-       div.input-group
-  //-         select.form-control(name='status')
-  //-           option(value='') -- choose --
-  //-           for status in data.statuses
-  //-             option(value='#{status._id}') #{status.name}
-  //-         div.input-group-btn
-  //-           button.btn.btn-default.btn-add Change
-  //-           
-  //-     div#status-collection
-  //-       div#status-items.status-items
-  //-         // Repeat
-  //-         div.pull-right.badge.author
-  //-           |<%= userCreated.name %>
-  //-           | -&nbsp;
-  //-           span.timeago <%= userCreated.time %>
-  //-         div <%- name %>
-  //-         div.clearfix
-  //- 
-  //- 
-  //-   fieldset
-  //-     div#notes-new.notes-new
-  //-       legend Notes
-  //-       // Alert
-  //-       textarea.form-control(rows='3' name='data' placeholder='enter notes')
-  //-       button.btn.btn-default.btn-block.btn-add Add New Note
-  //-       
-  //-     div#notes-collection
-  //-       div#notes-items.notes-items
-  //-         // Repeat
-  //-         div.force-wrap <%- data %>
-  //-         div.pull-right.badge.author
-  //-           |<%= userCreated.name %>
-  //-           | -&nbsp;
-  //-           span.timeago <%= userCreated.time %>
-  //-         div.clearfix
-  //-       // Else
-  //-       div.note.text-muted no notes found
+    //- fieldset
+    //-   div#status-new.status-new
+    //-     legend Status
+    //-     // Alert
+    //-     div.input-group
+    //-       select.form-control(name='status')
+    //-         option(value='') -- choose --
+    //-         for status in data.statuses
+    //-           option(value='#{status._id}') #{status.name}
+    //-       div.input-group-btn
+    //-         button.btn.btn-default.btn-add Change
+    //-         
+    //-   div#status-collection
+    //-     div#status-items.status-items
+    //-       // Repeat
+    //-       div.pull-right.badge.author
+    //-         |<%= userCreated.name %>
+    //-         | -&nbsp;
+    //-         span.timeago <%= userCreated.time %>
+    //-       div <%- name %>
+    //-       div.clearfix
+  
+    fieldset
+      form#notes-new.notes-newform(ng-submit='note.submit(note.data)' name='noteForm' novalidate)
+        legend Notes
+        alert(type='danger' ng-show='note.error' close='note.error = null') {{note.error}}
+        textarea.form-control(rows='3' name='data' ng-model='note.data' placeholder='enter notes' required)
+        button.btn.btn-default.btn-block(type='submit' ng-disabled='noteForm.$invalid') Add New Note
+        
+      div#notes-collection
+        div#notes-items.notes-items(ng-show='identity.notes')
+          div(ng-repeat='noteObject in identity.notes')
+            div.force-wrap {{noteObject.data}}
+            div.pull-right.badge.author
+              | {{noteObject.userCreated.name}}
+              | -&nbsp;
+              span.timeago {{ago(noteObject.timeCreated)}}
+            div.clearfix
+        div.note.text-muted(ng-hide='identity.notes') no notes found

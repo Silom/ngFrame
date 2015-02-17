@@ -65,6 +65,11 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
+    accountAddNote: function (id, input, success, error) {
+      $http.post('/api/accounts/'+ id +'/notes', input).success(function(res) {
+        success(res)
+      }).error(error)
+    },
 
 
     getUsers: function (filter, success, error) {
