@@ -45,10 +45,9 @@ module.exports = function($scope, $state, $stateParams, AdminService, momentjs) 
       }, function (err) {
         $scope.user.error = err.message
       })
-    },
+    }
   }
 
-  // save to note.list
   $scope.note = {
     submit: function (input) {
       AdminService.accountAddNote(accountId, {data: input}, function (res) {

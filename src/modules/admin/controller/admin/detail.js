@@ -6,6 +6,7 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
 
   AdminService.getAdmin(adminId, function (res) {
     $scope.identity = res
+    console.log(res)
   }, function (err) {
     $scope.error = err.message
   })
@@ -23,6 +24,25 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
     }, function (err) {
       $scope.identity.error = err.message
     })
+  }
+
+  $scope.user = {
+    unlink: function () {
+      AdminService.adminUnlinkUser(adminId, function (res) {
+        $scope.user.success = 'The link to the user was removed.'
+        $scope.identity.user = null
+      }, function (err) {
+        $scope.user.error = err.message
+      })
+    },
+    link: function (name) {
+      AdminService.adminLinkUser(adminId, {username: name}, function (res) {
+        $scope.user.success = 'User was added to the admin.'
+        $scope.identity = res
+      }, function (err) {
+        $scope.user.error = err.message
+      })
+    }
   }
 
   $scope.deleteAdmin = function () {

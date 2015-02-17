@@ -124,6 +124,16 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
+    adminLinkUser: function (id, user, success, error) {
+      $http.put('/api/admins/'+ id +'/user', user).success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    adminUnlinkUser: function (id, success, error) {
+      $http.delete('/api/admins/'+ id +'/user').success(function(res) {
+        success(res)
+      }).error(error)
+    },
 
 
     getAdminGroups: function (filter, success, error) {
