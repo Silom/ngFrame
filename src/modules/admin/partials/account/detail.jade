@@ -4,25 +4,25 @@ div.row
       div.page-header
         h1
           a(href='/admin/accounts/') Accounts
-          |  / {{identity.name.first}} {{identity.name.last}}
+          |  / {{account.name.first}} {{account.name.last}}
 
 div.row
   div.col-sm-8
     alert(type='danger' ng-show='error' close='error = null') {{error}}
-    form#details(ng-submit='identitySubmit(identity.name)' name='identityForm' novalidate)
+    form#details(ng-submit='identity.submit(account.name)' name='identityForm' novalidate)
       fieldset
         legend Contact Info
         alert(type='danger' ng-show='identity.error' close='identity.error = null') {{identity.error}}
         alert(type='success' ng-show='identity.success' close='identity.success = null') We updated your identity informations.
         div.form-group
           label First Name:
-          input.form-control(type='text' name='first' ng-model='identity.name.first' required)
+          input.form-control(type='text' name='first' ng-model='account.name.first' required)
         div.form-group
           label Middle Name:
-          input.form-control(type='text' name='middle' ng-model='identity.name.middle')
+          input.form-control(type='text' name='middle' ng-model='account.name.middle')
         div.form-group
           label Last Name:
-          input.form-control(type='text' name='last' ng-model='identity.name.last' required)
+          input.form-control(type='text' name='last' ng-model='account.name.last' required)
         div.form-group
           button.btn.btn-primary.btn-update(type='submit' ng-disabled='identityForm.$invalid') Update
 
@@ -31,15 +31,15 @@ div.row
         legend Login
         alert(type='danger' ng-show='user.error' close='user.error = null') {{user.error}}
         alert(type='success' ng-show='user.success' close='user.success = null') {{user.success}}
-        div(ng-show='identity.user')
+        div(ng-show='account.user')
           label Username:
           div.input-group
-            input.form-control(disabled=true ng-model='identity.user.name')
+            input.form-control(disabled=true ng-model='account.user.name')
             div.input-group-btn
               button.btn.btn-warning.btn-user-unlink(type='button' ng-click='user.unlink()') Unlink
-              button.btn.btn-default.btn-user-open(type='button' ui-sref='admin.userdetail({ id: identity.user.id })') Open
+              button.btn.btn-default.btn-user-open(type='button' ui-sref='admin.userdetail({ id: account.user.id })') Open
               
-        form(ng-hide='identity.user' ng-submit='user.link(user.data)' name='linkUserForm' novalidate)
+        form(ng-hide='account.user' ng-submit='user.link(user.data)' name='linkUserForm' novalidate)
           label Username:
           div.input-group
             input.form-control(name='newUsername' ng-model='user.data' type='text' placeholder='enter a username' required)
@@ -89,12 +89,12 @@ div.row
         button.btn.btn-default.btn-block(type='submit' ng-disabled='noteForm.$invalid') Add New Note
         
       div#notes-collection
-        div#notes-items.notes-items(ng-show='identity.notes')
-          div(ng-repeat='noteObject in identity.notes')
+        div#notes-items.notes-items(ng-show='account.notes')
+          div(ng-repeat='noteObject in account.notes')
             div.force-wrap {{noteObject.data}}
             div.pull-right.badge.author
               | {{noteObject.userCreated.name}}
               | -&nbsp;
               span.timeago {{ago(noteObject.timeCreated)}}
             div.clearfix
-        div.note.text-muted(ng-hide='identity.notes') no notes found
+        div.note.text-muted(ng-hide='account.notes') no notes found
