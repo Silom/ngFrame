@@ -109,8 +109,8 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
-    addAdmin: function (user, success, error) {
-      $http.post('/api/admins', user).success(function(res) {
+    addAdmin: function (admin, success, error) {
+      $http.post('/api/admins', admin).success(function(res) {
         success(res)
       }).error(error)
     },

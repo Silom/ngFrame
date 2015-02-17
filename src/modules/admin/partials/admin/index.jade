@@ -2,6 +2,10 @@ div.row
   div.col-xs-12
     div#header
       div.page-header
+        alert(type='danger' ng-show='newAdmin.error' close='newAdmin.error = null') {{newAdmin.error}} 
+        form.form-inline.pull-right(ng-submit='newAdmin.submit(newAdmin.data)' name='newAdminForm' novalidate)
+          input.form-control(name='name' ng-model='newAdmin.data.name' type='text' placeholder='enter a name' required)
+          button.btn.btn-primary.btn-add(type='submit' ng-disabled='newAdminForm.$invalid') Add New
         h1 Administrators
     
     alert(type='danger' ng-show='error' close='error = null') {{error}}
