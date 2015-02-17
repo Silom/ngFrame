@@ -10,7 +10,7 @@ module.exports = function(localStorageService, $http) {
     setAuthHeader(currentUser)
 
   function setAuthHeader(user) {
-    $http.defaults.headers.common['Authorization'] = 'Basic ' + new Buffer(user.username + ':' + user.key).toString('base64')
+    $http.defaults.headers.common['Authorization'] = user.authHeader
   }
 
   function changeUser(user) {
@@ -76,6 +76,7 @@ module.exports = function(localStorageService, $http) {
         metaUser.key = user.session.key
         metaUser.role = getRole(user.user)
         metaUser.username = user.user.username
+        metaUser.authHeader = user.authHeader
 
         changeUser(metaUser)
         saveUser(metaUser)
