@@ -22,7 +22,7 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
   $scope.deleteGroup = function () {
     if (confirm('Are you sure?')) {
       AdminService.deleteAdminGroup(groupId, function (res) {
-        $state.go('group.grouplist')
+        $state.go('admin.grouplist')
       }, function (err) {
         $scope.deleteGroupError = err.message
       })

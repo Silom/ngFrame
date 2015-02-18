@@ -2,12 +2,11 @@ div.row
   div.col-xs-12
     div#header
       div.page-header
-        //- form.form-inline.pull-right
-        //-   div.input-group
-        //-     input.form-control(name='name' type='text' placeholder='enter a name' value!='<%= name %>')
-            button.btn.btn-primary.btn-add(type='button') Add New
+        alert(type='danger' ng-show='newGroup.error' close='newGroup.error = null') {{newGroup.error}} 
+        form.form-inline.pull-right(ng-submit='newGroup.submit(newGroup.data)' name='newGroupForm' novalidate)
+          input.form-control(name='name' ng-model='newGroup.data.name' type='text' placeholder='enter a name' required)
+          button.btn.btn-primary.btn-add(type='submit' ng-disabled='newGroupForm.$invalid') Add New
         h1 Admin Groups
-
 
     //- div#filters
     //-   form.filters

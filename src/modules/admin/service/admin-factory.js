@@ -146,8 +146,8 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
-    addAdminGroup: function (user, success, error) {
-      $http.post('/api/admin-groups', user).success(function(res) {
+    addAdminGroup: function (group, success, error) {
+      $http.post('/api/admin-groups', group).success(function(res) {
         success(res)
       }).error(error)
     },
