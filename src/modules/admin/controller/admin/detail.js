@@ -5,7 +5,6 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
   var adminId = $stateParams.id
 
   AdminService.getAdmin(adminId, function (res) {
-    console.log(res)
     $scope.identity = res
   }, function (err) {
     $scope.error = err.message
