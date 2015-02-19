@@ -97,6 +97,11 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
+    updateUserPassword: function (id, password, success, error) {
+      $http.put('/api/users/' + id + '/password', password).success(function(res) {
+        success(res)
+      }).error(error)
+    },
 
 
     getAdmins: function (filter, success, error) {
@@ -131,6 +136,11 @@ module.exports = function ($http) {
     },
     adminUnlinkUser: function (id, success, error) {
       $http.delete('/api/admins/'+ id +'/user').success(function(res) {
+        success(res)
+      }).error(error)
+    },
+    setAdminPermission: function (id, permission, success, error) {
+      $http.put('/api/admins/'+ id +'/permissions', permission).success(function(res) {
         success(res)
       }).error(error)
     },
