@@ -48,64 +48,52 @@ div.row
     //- div#groups
     //-   fieldset
     //-     legend Groups
-    //-     // alert
-    //-     div.form-group
+    //-     alert(type='danger' ng-show='group.error' close='group.error = null') {{group.error}}
+    //-     alert(type='success' ng-show='group.success' close='group.success = null') {{group.success}}
+    //-     form.form-group
     //-       label Add Membership:
     //-       div.input-group
     //-         select.form-control(name='newMembership')
-    //-           for group in data.adminGroups
-    //-             option(value='#{group._id}') #{group.name}
+    //-           //for group in data.adminGroups
+    //-           option(value='#{group._id}') #{group.name}
     //-         div.input-group-btn
     //-           button.btn.btn-success.btn-add(type='button') Add
     //-     div.form-group
     //-       label Memberships:
     //-       div.groups
-    //-         |<% _.each(groups function(group) { %>
-    //-         div.input-group
-    //-           input.form-control(disabled=true value='<%= group.name %>')
-    //-           div.input-group-btn
-    //-             button.btn.btn-danger.btn-delete(type='button')
-    //-               i.fa.fa-trash-o.fa-inverse
-    //-         |<% }); %>
-    //-         |<% if (groups.length == 0) { %>
-    //-         span.badge no memberships defined
-    //-         |<% } %>
-    //-     div.form-group
-    //-       button.btn.btn-primary.btn-save(type='button') Save Groups
-          
-          
+    //-         div(ng-show='identity.groups')
+    //-           div.input-group
+    //-             input.form-control(disabled=true ng-value='identity.groups.root')
+    //-             div.input-group-btn
+    //-               button.btn.btn-danger.btn-delete(type='button' ng-click='group.delete()')
+    //-                 i.fa.fa-trash-o.fa-inverse
+    //-         span.badge(ng-hide='identity.groups') no memberships defined
+            
+
+    //- Seems broken in frame
     //- div#permissions
     //-   fieldset
     //-     legend Permissions
-    //-     // Alert
-    //-     div.form-group
+    //-     alert(type='danger' ng-show='permission.error' close='permission.error = null') {{permission.error}}
+    //-     alert(type='success' ng-show='permission.success' close='permission.success = null') {{permission.success}}
+    //-     form.form-group(ng-submit='permission.submit(permission.data)' name='permissionForm' novalidate)
     //-       label New Setting:
     //-       div.input-group
-    //-         input.form-control(name='newPermission' type='text' placeholder='enter a name')
+    //-         input.form-control(name='newPermission' ng-model='permission.data' type='text' placeholder='enter a name' required)
     //-         div.input-group-btn
-    //-           button.btn.btn-success.btn-add(type='button') Add
+    //-           button.btn.btn-success.btn-add(type='submit' ng-disabled='permissionForm.$invalid') Add
     //-     div.form-group
     //-       label Settings:
-    //-       div.permissions
-    //-         |<% _.each(permissions function(permission) { %>
+    //-       div.permissions(ng-show='identity.permissions' ng-repeat='permissionObj in identity.permissions')
     //-         div.input-group
-    //-           input.form-control(disabled=true value='<%= permission.name %>')
+    //-           input.form-control(disabled=true ng-value='permissionObj.name')
     //-           div.input-group-btn
-    //-             |<% if (permission.permit) { %>
-    //-             button.btn.btn-default.btn-allow(type='button' disabled) Allow
-    //-             button.btn.btn-default.btn-deny(type='button') Deny
-    //-             |<% } else { %>
-    //-             button.btn.btn-default.btn-allow(type='button') Allow
-    //-             button.btn.btn-default.btn-deny(type='button' disabled) Deny
-    //-             |<% } %>
-    //-             button.btn.btn-danger.btn-delete(type='button')
+    //-             button.btn.btn-default.btn-allow(type='button' ng-disabled='permissionObj.permit') Allow
+    //-             button.btn.btn-default.btn-deny(type='button' ng-disabled='!permissionObj.permit') Deny
+    //-             button.btn.btn-danger.btn-delete(type='button' ng-click='permission.delete(permissionObj)')
     //-               i.fa.fa-trash-o.fa-inverse
-    //-         |<% }); %>
-    //-         |<% if (permissions.length == 0) { %>
+    //-       div.permissions(ng-hide='identity.permissions')
     //-         span.badge no permissions defined
-    //-         |<% } %>
-    //-     div.form-group
-    //-       button.btn.btn-primary.btn-set(type='button') Save Settings
       
       
     div#delete

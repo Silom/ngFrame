@@ -5,6 +5,7 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
   var adminId = $stateParams.id
 
   AdminService.getAdmin(adminId, function (res) {
+    console.log(res)
     $scope.identity = res
   }, function (err) {
     $scope.error = err.message
@@ -43,6 +44,17 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
       })
     }
   }
+
+  // Seems broken in frame
+  // $scope.permission = {
+  //   submit: function (key) {
+  //     AdminService.setAdminPermission(adminId, {permissions: { permit: true, name: key }}, function (res) {
+  //       $scope.identity = res
+  //     }, function (err) {
+  //       $scope.permission.error = err.message
+  //     })
+  //   }
+  // }
 
   $scope.deleteAdmin = function () {
     if (confirm('Are you sure?')) {
