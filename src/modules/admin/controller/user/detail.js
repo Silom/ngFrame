@@ -8,7 +8,6 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
     $scope.error = err.message
   })
 
-
   $scope.identitySubmit = function (data) {
     var toSend = {
       isActive: data.isActive,
@@ -22,6 +21,16 @@ module.exports = function($scope, $state, $stateParams, AdminService) {
     })
   }
 
+  $scope.password = {
+    submit: function (input) {
+      AdminService.updateUserPassword(userId, input, function (res) {
+        $scope.identity = res
+        $scope.password.success = true
+      }, function (err) {
+        $scope.password.error = err.message
+      })
+    }
+  }
 
   $scope.deleteUser = function () {
     if (confirm('Are you sure?')) {
