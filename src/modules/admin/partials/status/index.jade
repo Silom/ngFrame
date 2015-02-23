@@ -13,29 +13,29 @@ div.row
         h1 Statuses
     
     alert(type='danger' ng-show='error' close='error = null') {{error}}
-    //- div#filters
-    //-   form.filters
-    //-     div.row
-    //-       div.col-sm-3
-    //-         label Pivot Search
-    //-         input.form-control(name='pivot' type='text')
-    //-       div.col-sm-3
-    //-         label Name Search
-    //-         input.form-control(name='name' type='text')
-    //-       div.col-sm-3
-    //-         label Sort By
-    //-         select.form-control(name='sort')
-    //-           option(value='_id') id &#9650;
-    //-           option(value='-_id') id &#9660;
-    //-           option(value='name') name &#9650;
-    //-           option(value='-name') name &#9660;
-    //-       div.col-sm-3
-    //-         label Limit
-    //-         select.form-control(name='limit')
-    //-           option(value='10') 10 items
-    //-           option(value='20' selected='selected') 20 items
-    //-           option(value='50') 50 items
-    //-           option(value='100') 100 items
+    div#filters
+      form.filters
+        div.row
+          div.col-sm-3
+            label Pivot Search
+            input.form-control(ng-model='filterQuery.pivot' type='text')
+          div.col-sm-3
+            label Name Search
+            input.form-control(ng-model='filterQuery.name' type='text')
+          div.col-sm-3
+            label Sort By
+            select.form-control(ng-model='sortQuery')
+              option(value='_id') id &#9650;
+              option(value='-_id') id &#9660;
+              option(value='name') name &#9650;
+              option(value='-name') name &#9660;
+          //- div.col-sm-3
+          //-   label Limit
+          //-   select.form-control(name='limit')
+          //-     option(value='10') 10 items
+          //-     option(value='20' selected='selected') 20 items
+          //-     option(value='50') 50 items
+          //-     option(value='100') 100 items
               
     div#results-table
       table.table.table-striped
@@ -46,7 +46,7 @@ div.row
             th.stretch name
             th id
         tbody#results-rows
-          tr(ng-repeat='status in statusList' ng-hide='statusList.length === 0')
+          tr(ng-repeat='status in statusList | filter:filterQuery | orderBy:sortQuery' ng-hide='statusList.length === 0')
             td
               input.btn.btn-default.btn-sm.btn-details(type='button' value='Edit' ui-sref='admin.statusdetail({ id: status._id })')
             td {{status.pivot}}

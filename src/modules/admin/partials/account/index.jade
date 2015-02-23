@@ -9,34 +9,33 @@ div.row
         h1 Accounts
     
     alert(type='danger' ng-show='error' close='error = null') {{error}}
-    //- div#filters
-    //-   form.filters
-    //-     div.row
-    //-       div.col-sm-3
-    //-         label Search
-    //-         input.form-control(name='search' type='text')
-    //-       div.col-sm-3
-    //-         label Status
-    //-         select.form-control(name='status')
-    //-           option(value='') -- any --
-    //-           for status in data.statuses
-    //-             option(value='#{status._id}') #{status.name}
-    //-       div.col-sm-3
-    //-         label Sort By
-    //-         select.form-control(name='sort')
-    //-           option(value='_id') id &#9650;
-    //-           option(value='-_id') id &#9660;
-    //-           option(value='name') name &#9650;
-    //-           option(value='-name') name &#9660;
-    //-           option(value='company') company &#9650;
-    //-           option(value='-company') company &#9660;
-    //-       div.col-sm-3
-    //-         label Limit
-    //-         select.form-control(name='limit')
-    //-           option(value='10') 10 items
-    //-           option(value='20' selected='selected') 20 items
-    //-           option(value='50') 50 items
-    //-           option(value='100') 100 items
+    div#filters
+      form.filters
+        div.row
+          div.col-sm-3
+            label First Name Search
+            input.form-control(ng-model='filterQuery.name.first' type='text')
+          div.col-sm-3
+            label Last Name Search
+            input.form-control(ng-model='filterQuery.name.last' type='text')
+          //- div.col-sm-3
+          //-   label Status
+          //-   select.form-control(name='status')
+          //-     option(value='') -- any --
+          //-     for status in data.statuses
+          //-       option(value='#{status._id}') #{status.name}
+          div.col-sm-3
+            label Sort By
+            select.form-control(ng-model='sortQuery')
+              option(value='name') name &#9650;
+              option(value='-name') name &#9660;
+          //- div.col-sm-3
+          //-   label Limit
+          //-   select.form-control(name='limit')
+          //-     option(value='10') 10 items
+          //-     option(value='20' selected='selected') 20 items
+          //-     option(value='50') 50 items
+          //-     option(value='100') 100 items
               
     div#results-table
       table.table.table-striped
@@ -47,7 +46,7 @@ div.row
               | name
               span.pull-right.timeago.muted age
         tbody#results-rows
-          tr(ng-hide='accountList.length === 0' ng-repeat='account in accountList')
+          tr(ng-hide='accountList.length === 0' ng-repeat='account in accountList | filter:filterQuery | orderBy:sortQuery')
             td
               input.btn.btn-default.btn-sm.btn-details(type='button' value='Edit' ui-sref='admin.accountdetail({ id: account._id })')
             td.stretch

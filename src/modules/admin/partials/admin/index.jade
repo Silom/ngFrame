@@ -9,26 +9,29 @@ div.row
         h1 Administrators
     
     alert(type='danger' ng-show='error' close='error = null') {{error}}
-    //- div#filters
-    //-   form.filters
-    //-     div.row
-    //-       div.col-sm-3
-    //-         label Name Search
-    //-         input.form-control(name='search', type='text')
-    //-       div.col-sm-3
-    //-         label Sort By
-    //-         select.form-control(name='sort')
-    //-           option(value='_id') id &#9650;
-    //-           option(value='-_id') id &#9660;
-    //-           option(value='name') name &#9650;
-    //-           option(value='-name') name &#9660;
-    //-       div.col-sm-3
-    //-         label Limit
-    //-         select.form-control(name='limit')
-    //-           option(value='10') 10 items
-    //-           option(value='20', selected='selected') 20 items
-    //-           option(value='50') 50 items
-    //-           option(value='100') 100 items
+    div#filters
+      form.filters
+        div.row
+          div.col-sm-3
+            label First Name Search
+            input.form-control(ng-model='filterQuery.name.first' type='text')
+          div.col-sm-3
+            label Last Name Search
+            input.form-control(ng-model='filterQuery.name.last' type='text')
+          div.col-sm-3
+            label Sort By
+            select.form-control(ng-model='sortQuery')
+              option(value='_id') id &#9650;
+              option(value='-_id') id &#9660;
+              option(value='name') name &#9650;
+              option(value='-name') name &#9660;
+          //- div.col-sm-3
+          //-   label Limit
+          //-   select.form-control(name='limit')
+          //-     option(value='10') 10 items
+          //-     option(value='20', selected='selected') 20 items
+          //-     option(value='50') 50 items
+          //-     option(value='100') 100 items
               
     div#results-table
       table.table.table-striped
@@ -38,7 +41,7 @@ div.row
             th.stretch name
             th id
         tbody#results-rows
-          tr(ng-hide='adminList.length === 0' ng-repeat='admin in adminList')
+          tr(ng-hide='adminList.length === 0' ng-repeat='admin in adminList | filter:filterQuery | orderBy:sortQuery')
             td
               input.btn.btn-default.btn-sm.btn-details(type='button' value='Edit' ui-sref='admin.admindetail({ id: admin._id })')
             td.nowrap {{admin.name.first}} {{admin.name.last}}
