@@ -23,6 +23,39 @@ div.row
           input.form-control(type='text' ng-model='identity.email' name='email' value='{{identity.email}}' required)
         div.form-group
           button.btn.btn-primary.btn-update(type='submit' ng-disabled='identityForm.$invalid') Update
+          
+
+    div#roles
+      fieldset
+        legend Roles
+        alert(type='danger' ng-show='roles.error' close='roles.error = null') {{roles.error}}
+        alert(type='success' ng-show='roles.success' close='roles.success = null') {{roles.success}}
+        div.form-group
+          label Admin:
+          div.input-group(ng-show='identity.roles.admin')
+            input.form-control(disabled=true ng-value='identity.roles.admin.name')
+            div.input-group-btn
+              button.btn.btn-warning.btn-admin-unlink(type='button' ng-click='roles.unlinkAdmin()') Unlink
+              button.btn.btn-default.btn-admin-open(type='button' ui-sref='admin.admindetail({ id: identity.roles.admin.id })') Open
+          
+          form.input-group(ng-hide='identity.roles.admin' ng-submit='roles.linkAdmin(roles.data.admin)' name='adminLinkForm' novalidate)
+            input.form-control(ng-model='roles.data.admin' type='text' placeholder='enter admin id' required)
+            div.input-group-btn
+              button.btn.btn-success.btn-admin-link(type='submit' ng-disabled='adminLinkForm.$invalid') Link
+
+        div.form-group
+          label Account:
+          div.input-group(ng-show='identity.roles.account')
+            input.form-control(disabled=true ng-value='identity.roles.account.name')
+            div.input-group-btn
+              button.btn.btn-warning.btn-account-unlink(type='button' ng-click='roles.unlinkAccount()') Unlink
+              button.btn.btn-default.btn-account-open(type='button' ui-sref='admin.accountdetail({ id: identity.roles.account.id })') Open
+
+          form.input-group(ng-hide='identity.roles.account' ng-submit='roles.linkAdmin(roles.data.account)' name='accountLinkForm' novalidate)
+            input.form-control(ng-model='roles.data.account' type='text' placeholder='enter account id' required)
+            div.input-group-btn
+              button.btn.btn-success.btn-account-link(type='submit' ng-disabled='accountLinkForm.$invalid') Link
+            
 
     form#password(ng-submit='password.submit(password.data)' name='passwordForm' novalidate)
       fieldset
