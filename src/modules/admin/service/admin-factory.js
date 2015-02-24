@@ -70,6 +70,11 @@ module.exports = function ($http) {
         success(res)
       }).error(error)
     },
+    accountAddStatus: function (id, input, success, error) {
+      $http.post('/api/accounts/'+ id +'/status', input).success(function(res) {
+        success(res)
+      }).error(error)
+    },
 
 
     getUsers: function (filter, success, error) {

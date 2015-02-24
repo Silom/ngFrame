@@ -8,9 +8,28 @@ module.exports = function($scope, $state, $stateParams, AdminService, momentjs) 
 
   AdminService.getAccount(accountId, function (res) {
     $scope.account = res
+    console.log(res)
   }, function (err) {
     $scope.error = err.message
   })
+
+  AdminService.getStatuses({}, function (res) {
+    $scope.statuses = res
+    console.log(res)
+  }, function (err) {
+    $scope.error = err.message
+  })
+
+  $scope.status = {
+    submit: function (input) {
+      AdminService.accountAddStatus(accountId, {status: input}, function (res) {
+        $scope.status.success = true
+        $scope.status.data = ''
+      }, function (err) {
+        $scope.status.error = err.message
+      })
+    }
+  }
 
   $scope.identity = {
     submit: function (input) {

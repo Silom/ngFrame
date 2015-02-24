@@ -59,27 +59,27 @@ div.row
           button.btn.btn-danger.btn-delete(type='button' ng-click='deleteAccount()') Delete
       
   div.col-sm-4
-    //- fieldset
-    //-   div#status-new.status-new
-    //-     legend Status
-    //-     // Alert
-    //-     div.input-group
-    //-       select.form-control(name='status')
-    //-         option(value='') -- choose --
-    //-         for status in data.statuses
-    //-           option(value='#{status._id}') #{status.name}
-    //-       div.input-group-btn
-    //-         button.btn.btn-default.btn-add Change
-    //-         
-    //-   div#status-collection
-    //-     div#status-items.status-items
-    //-       // Repeat
-    //-       div.pull-right.badge.author
-    //-         |<%= userCreated.name %>
-    //-         | -&nbsp;
-    //-         span.timeago <%= userCreated.time %>
-    //-       div <%- name %>
-    //-       div.clearfix
+    fieldset
+      div#status-new.status-new
+        legend Status
+        alert(type='danger' ng-show='status.error' close='status.error = null') {{status.error}}
+        alert(type='success' ng-show='status.success' close='status.success = null') Status was added.
+        form.input-group(ng-submit='status.submit(status.data)' name='statusForm' novalidate)
+          div {{statusNew}}
+          select.form-control(ng-model='status.data' required)
+            option(value='') --select--
+            option(ng-repeat='status in statuses.data' value='{{status._id}}') {{status.name}}
+          div.input-group-btn
+            button.btn.btn-default.btn-add(type='submit' ng-disabled='statusForm.$invalid') Change
+            
+      div#status-collection
+        div#status-items.status-items(ng-repeat='status in account.status.log')
+          div.pull-right.badge.author
+            | {{status.userCreated.name}}
+            | -&nbsp;
+            span.timeago {{ago(sttaus.timeCreated)}}
+          div {{status.name}}
+          div.clearfix
   
     fieldset
       form#notes-new.notes-newform(ng-submit='note.submit(note.data)' name='noteForm' novalidate)
@@ -90,7 +90,7 @@ div.row
         
       div#notes-collection
         div#notes-items.notes-items(ng-show='account.notes')
-          div(ng-repeat='noteObject in account.notes')
+          div.note(ng-repeat='noteObject in account.notes')
             div.force-wrap {{noteObject.data}}
             div.pull-right.badge.author
               | {{noteObject.userCreated.name}}
