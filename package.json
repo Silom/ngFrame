@@ -1,6 +1,6 @@
 {
   "name": "ngFrame",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular.js front end for Frame",
   "private": true,
   "scripts": {
