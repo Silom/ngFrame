@@ -6,11 +6,25 @@ module.exports = function ($scope, $state, AdminService, momentjs) {
     return momentjs(time).fromNow()
   }
 
-  AdminService.getAccounts(null, function (res) {
-    $scope.accountList = res.data
-  }, function (err) {
-    $scope.error = err.message
+  var request = function (page) {
+    AdminService.getAccounts({
+      limit: 50,
+      page: page || 1
+    }, function (res) {
+      $scope.accountList = res
+    }, function (err) {
+      $scope.error = err.message
+    })
+  }
+
+  $scope.currentPage = 1
+  $scope.$watch('currentPage', function () {
+    switchPage()
   })
+
+  var switchPage = function () {
+    request($scope.currentPage)
+  }
 
   $scope.newAccount = {
     submit: function (input) {

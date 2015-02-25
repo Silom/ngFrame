@@ -1,11 +1,26 @@
 'use strict';
 
 module.exports = function ($scope, $state, AdminService) {
-  AdminService.getAdmins(null, function (res) {
-    $scope.adminList = res.data
-  }, function (err) {
-    $scope.error = err.message
+  var request = function (page) {
+    AdminService.getAdmins({
+      limit: 50,
+      page: page || 1
+    }, function (res) {
+      $scope.adminList = res
+    }, function (err) {
+      $scope.error = err.message
+    })
+  }
+
+  $scope.currentPage = 1
+  $scope.$watch('currentPage', function () {
+    switchPage()
   })
+
+  var switchPage = function () {
+    request($scope.currentPage)
+  }
+
 
   $scope.newAdmin = {
     submit: function (input) {

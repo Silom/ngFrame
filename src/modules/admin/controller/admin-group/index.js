@@ -1,11 +1,26 @@
 'use strict';
 
 module.exports = function ($scope, $state, AdminService) {
-  AdminService.getAdminGroups(null, function (res) {
-    $scope.groupList = res.data
-  }, function (err) {
-    $scope.error = err.message
+
+  var request = function (page) {
+    AdminService.getAdminGroups({
+      limit: 50,
+      page: page || 1
+    }, function (res) {
+      $scope.groupList = res
+    }, function (err) {
+      $scope.error = err.message
+    })
+  }
+
+  $scope.currentPage = 1
+  $scope.$watch('currentPage', function () {
+    switchPage()
   })
+
+  var switchPage = function () {
+    request($scope.currentPage)
+  }
 
   $scope.newGroup = {
     submit: function (input) {

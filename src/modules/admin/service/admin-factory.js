@@ -31,7 +31,12 @@ module.exports = function ($http) {
 
 
     getAccounts: function (filter, success, error) {
-      $http.get('/api/accounts', filter).success(function(res) {
+      var query = ''
+      if (filter && filter.limit) {
+        if (filter.limit) query += '?limit=' + filter.limit
+        if (filter.page) query += '&page=' + filter.page
+      }
+      $http.get('/api/accounts' + query).success(function(res) {
         success(res)
       }).error(error)
     },
@@ -152,7 +157,12 @@ module.exports = function ($http) {
 
 
     getAdminGroups: function (filter, success, error) {
-      $http.get('/api/admin-groups', filter).success(function(res) {
+      var query = ''
+      if (filter && filter.limit) {
+        if (filter.limit) query += '?limit=' + filter.limit
+        if (filter.page) query += '&page=' + filter.page
+      }
+      $http.get('/api/admin-groups' + query).success(function(res) {
         success(res)
       }).error(error)
     },
