@@ -4,7 +4,12 @@ module.exports = function ($http) {
 
   return {
     getStatuses: function (filter, success, error) {
-      $http.get('/api/statuses', filter).success(function(res) {
+      var query = ''
+      if (filter && filter.limit) {
+        if (filter.limit) query += '?limit=' + filter.limit
+        if (filter.page) query += '&page=' + filter.page
+      }
+      $http.get('/api/statuses' + query).success(function(res) {
         success(res)
       }).error(error)
     },
@@ -83,7 +88,12 @@ module.exports = function ($http) {
 
 
     getUsers: function (filter, success, error) {
-      $http.get('/api/users', filter).success(function(res) {
+      var query = ''
+      if (filter && filter.limit) {
+        if (filter.limit) query += '?limit=' + filter.limit
+        if (filter.page) query += '&page=' + filter.page
+      }
+      $http.get('/api/users' + query).success(function(res) {
         success(res)
       }).error(error)
     },
@@ -115,7 +125,12 @@ module.exports = function ($http) {
 
 
     getAdmins: function (filter, success, error) {
-      $http.get('/api/admins', filter).success(function(res) {
+      var query = ''
+      if (filter && filter.limit) {
+        if (filter.limit) query += '?limit=' + filter.limit
+        if (filter.page) query += '&page=' + filter.page
+      }
+      $http.get('/api/admins' + query).success(function(res) {
         success(res)
       }).error(error)
     },
