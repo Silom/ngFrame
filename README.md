@@ -1,5 +1,7 @@
 # ngFrame
 
+Please note that this repository is deprecated, due to entirely new angular versions and a low usage I quitted supporting this project. Thanks to all my users, it was fun to build ;).
+
 [![Build Status](https://travis-ci.org/Silom/ngFrame.svg?branch=master)](https://travis-ci.org/Silom/ngFrame)
 [![dependencies](https://david-dm.org/silom/ngframe.png)](https://david-dm.org/silom/ngframe)
 
